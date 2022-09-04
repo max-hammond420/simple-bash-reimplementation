@@ -1,12 +1,12 @@
-import commands.commands1 as commands1
-import commands.commands2 as commands2
-import commands.commands3 as commands3
+def exit_cmd(user):
+    print("Bye, <current_user>")
+    sys.exit()
 
 def execute(cmd: list) -> None:
     a = cmd[0]
     ### TODO Implement first
     if a == "exit":
-        exit_file.exit_cmd('$')
+        commands1.exit_cmd('$')
     elif a == "pwd":
         pass
     elif a == "cd":
