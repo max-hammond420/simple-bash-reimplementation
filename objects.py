@@ -72,12 +72,15 @@ class Folder():
         return self.name
 
     def get_items(self) -> list:
-        for i in range(len(self.items)):
-            print(self.items[i])
         return self.items
 
-    def add_folder(self, name):
+    def add_folder(self, name, user):
         # add children
+        new_name = name+'/'
+        new_folder = Folder(new_name, user)
+        self.items.append(new_folder)
+
+    def add_file(self, name):
         self.items.append(name)
 
     def touch(self, name, location='.'):
@@ -99,9 +102,6 @@ class Folder():
                 other_str += '-'
 
         return 'd' + owner_str + other_str
-
-    def mkdir(self):
-        pass
 
     def touch(self):
         pass

@@ -1,4 +1,4 @@
-
+from exe_mkdir import mkdir as mkdir
 
 def execute(cmd: list) -> None:
     a = cmd[0]
@@ -8,7 +8,7 @@ def execute(cmd: list) -> None:
     elif a == "cd":
         pass
     elif a == "mkdir":
-        pass
+        mkdir()
     elif a == "touch":
         pass
 

@@ -10,7 +10,7 @@ def main():
             'chmod', 'chown', 'adduser', 'deluser', 'su', 'ls']
 
     users = ['root']
-    root = Folder('/', users[i])
+    root = Folder('/', users[0])
 
     while True:
 
