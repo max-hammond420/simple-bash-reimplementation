@@ -3,7 +3,7 @@
 def execute(cmd: list) -> None:
     a = cmd[0]
     ### TODO Implement first
-    elif a == "pwd":
+    if a == "pwd":
         pass
     elif a == "cd":
         pass
