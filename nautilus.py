@@ -1,61 +1,29 @@
-def exit_cmd(user):
-    print("Bye, <current_user>")
-    sys.exit()
-
-def execute(cmd: list) -> None:
-    a = cmd[0]
-    ### TODO Implement first
-    if a == "exit":
-        commands1.exit_cmd('$')
-    elif a == "pwd":
-        pass
-    elif a == "cd":
-        pass
-    elif a == "mkdir":
-        pass
-    elif a == "touch":
-        pass
-
-    ### TODO Implement 2nd
-    elif a == "cp":
-        pass
-    elif a == "mv":
-        pass
-    elif a == "rm":
-        pass
-    elif a == "rmdir":
-        pass
-
-    ### TODO implement 3rd
-    elif a == "chmod":
-        pass
-    elif a == "chown":
-        pass
-    elif a == "adduser":
-        pass
-    elif a == "deluser":
-        pass
-    elif a == "su":
-        pass
-    elif a == "ls":
-        pass
+from objects import *
+import commands.execute as execute
 
 def display_prompt(user: str, path: str) -> str:
     pass
 
 def main():
-    cmds = ['exit', 'pwd', 'cd', 'mkdir', 'touch',
+    cmds = ['pwd', 'cd', 'mkdir', 'touch',
             'cp', 'mv', 'rm', 'rmdir',
             'chmod', 'chown', 'adduser', 'deluser', 'su', 'ls']
 
+    users = ['root']
+    root = Folder('/', users[i])
+
     while True:
+
+        ### REPLACE WITH DISPLAY_PROMPT()
         #cmd = str(input(display_prompt()))
         cmd = str(input("$ "))
+
         full_cmd = cmd.split(' ')
         if full_cmd[0] in cmds:
-            execute(full_cmd)
-
-
+            execute.execute(full_cmd)
+        elif full_cmd[0] == "exit":
+            break
+    print("Bye, <current user>")
 
 if __name__ == '__main__':
     main()
