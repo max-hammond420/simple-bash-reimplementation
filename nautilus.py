@@ -1,5 +1,5 @@
 from objects import *
-import commands.execute as execute
+import execute as execute
 
 def display_prompt(user: str, path: str) -> str:
     pass
