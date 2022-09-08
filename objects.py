@@ -107,8 +107,7 @@ def cd(name, user, parent_folder, root):
         return parent_folder
     elif name == '..':
         if parent_folder.parent == None:
-            print("cd: No such file or directory")
-            return parent_folder
+            return root
         return parent_folder.parent
     if name == '/':
         return root
@@ -117,7 +116,7 @@ def cd(name, user, parent_folder, root):
         if folder.get_name() == name:
             if type(folder) == Folder:
                 return folder
-            else:
+            elif type(folder) == File:
                 print("cd: Destination is a file")
                 return parent_folder
     print("cd: No such file or directory")
