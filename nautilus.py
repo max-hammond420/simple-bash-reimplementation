@@ -18,12 +18,14 @@ def main():
 
     while True:
 
-        ### REPLACE WITH DISPLAY_PROMPT()
         cmd = str(input(display_prompt(current_user, pwd(cwd))))
 
         full_cmd = cmd.split(' ')
         if full_cmd[0] in cmds:
             if full_cmd[0] == 'cd':
+                if len(full_cmd) <= 1:
+                    print("cd: Invalid syntax")
+                    continue
                 cwd = cd(full_cmd[1], current_user, cwd, root)
             execute(full_cmd, current_user, cwd, root)
         elif full_cmd[0] == "exit":
