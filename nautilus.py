@@ -13,7 +13,8 @@ def main():
 
     users = ['root']
     current_user = users[0]
-    cwd = Folder('', current_user)
+    root = Folder('', current_user)
+    cwd = root
 
     while True:
 
@@ -24,7 +25,7 @@ def main():
         if full_cmd[0] in cmds:
             if full_cmd[0] == 'cd':
                 cwd = cd(full_cmd[1], current_user, cwd)
-            execute(full_cmd, current_user, cwd)
+            execute(full_cmd, current_user, cwd, root)
         elif full_cmd[0] == "exit":
             break
         else:

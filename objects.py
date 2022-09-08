@@ -55,8 +55,8 @@ class Folder():
         self.other_permissions = [True, False, True]
 
     def __str__(self):
-        return str(self.__class__) + ": " + str(self.__dict__)
-        #return self.name
+        #return str(self.__class__) + ": " + str(self.__dict__)
+        return self.name
 
     def get_parent(self):
         return self.parent
@@ -96,6 +96,11 @@ class Folder():
     def add_parent(self, parent):
         self.parent = parent
 
+def get_every_folder(s):
+    # takes in string /a/b/c -> ['', 'a', 'b', 'c']
+    # or a/b/c -> ['a', 'b', 'c']
+    s = s.split('/')
+    return s
 
 def cd(name, user, parent_folder):
     if name == '.':
@@ -116,18 +121,44 @@ def cd(name, user, parent_folder):
     print("cd: No such file or directory")
     return parent_folder
 
-def cd_dashp(name, user, parent_folder):
-    pass
-
 def ls(folder):
     for item in folder.get_items():
         print(item)
 
-def mkdir(cmds, user, parent_folder):
-    new_folder = Folder(cmds[1], user, parent_folder)
-    #new_folder.add_parent_directory()
-    new_folder.add_parent(parent_folder)
-    return parent_folder.add_item(new_folder, user)
+def mkdir(cwd, user, parent_folders):
+    if parent_folders[0] == '':
+        parent_folders = parent_folders[1:]
+    new_folder_name = parent_folders[-1]
+    if len(parent_folders) > 1:
+        parent_folders = parent_folders[:-1]
+        for i in range(len(parent_folders)):
+            cwd_items = []
+            for j in range(len(cwd.get_items())):
+                cwd_items.append(cwd.get_items()[j].get_name()[:-1])
+            if parent_folders[i] in cwd_items:
+                index = cwd_items.index(parent_folders[i])
+                cwd = cwd.get_items()[index]
+            else:
+                print("mkdir: Ancestor directory does not exist")
+                return None
+    else:
+        parent_folders = [cwd]
+    #print(new_folder_name, parent_folders)
+    new_folder = Folder(new_folder_name, user, cwd)
+    #print(parent_folders[-1])
+    #print(cwd)
+    new_folder.add_parent(cwd)
+    return cwd.add_item(new_folder, user)
+
+def mkdir_dashp(cwd, user, parent_folders):
+    # iterate over parent_folders,
+    # check when cwd is does not exist, and mkdir on that
+    if parent_folders[0] == '':
+        parent_folders = parent_folders[1:]
+    existing_folders = []
+    tbc_folders = []
+    for i in range(len(parent_folders)):
+        pass
 
 def touch(parent_folder, name, user):
     new_file = File(name, user)
