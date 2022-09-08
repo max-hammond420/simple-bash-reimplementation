@@ -102,7 +102,7 @@ def get_every_folder(s):
     s = s.split('/')
     return s
 
-def cd(name, user, parent_folder):
+def cd(name, user, parent_folder, root):
     if name == '.':
         return parent_folder
     elif name == '..':
@@ -110,6 +110,8 @@ def cd(name, user, parent_folder):
             print("cd: No such file or directory")
             return parent_folder
         return parent_folder.parent
+    if name == '/':
+        return root
     name += '/'
     for folder in parent_folder.get_items():
         if folder.get_name() == name:
