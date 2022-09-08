@@ -30,7 +30,7 @@ def main():
             break
         else:
             print(f"{full_cmd[0]}: command not found")
-    print(f"Bye, {current_user}")
+    print(f"bye, {current_user}")
 
 if __name__ == '__main__':
     main()
