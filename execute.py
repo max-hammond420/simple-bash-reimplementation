@@ -4,7 +4,10 @@ def execute(cmd: list, user, cwd, root) -> None:
     a = cmd[0]
     ### TODO Implement first
     if a == "pwd":
-        print(pwd(cwd, root))
+        if pwd(cwd) == pwd(root):
+            print(pwd(cwd))
+        else:
+            print(pwd(cwd)[:-1])
     elif a == "mkdir":
         if '-p' in cmd:
             if cmd[2][0] == '/':

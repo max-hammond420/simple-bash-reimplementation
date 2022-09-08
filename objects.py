@@ -165,8 +165,7 @@ def touch(parent_folder, name, user):
     new_file = File(name, user)
     parent_folder.add_item(new_file, user)
 
-def pwd(current_directory, root):
-    a = current_directory
+def pwd(current_directory):
     ls = [current_directory]
     while current_directory.get_parent() != None:
         ls.append(current_directory.get_parent())
@@ -176,8 +175,6 @@ def pwd(current_directory, root):
     ls_size = len(ls)
     for i in range(len(ls)-1, -1, -1):
         s += ls[i].get_name()
-    if a != root:
-        s = s[:-1]
     return s
 
 def ls(current_directory):
