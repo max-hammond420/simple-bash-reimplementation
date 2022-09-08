@@ -109,7 +109,7 @@ def cd(name, user, parent_folder, root):
         if parent_folder.parent == None:
             return root
         return parent_folder.parent
-    if name == '/':
+    if name == '':
         return root
     name += '/'
     for folder in parent_folder.get_items():
