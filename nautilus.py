@@ -1,7 +1,6 @@
 from objects import *
-import execute as execute
 
-def display_prompt(user: str, path: str) -> str:
+def display_prompt(user, path):
     pass
 
 def main():

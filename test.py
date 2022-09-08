@@ -1,12 +1,12 @@
 from objects import *
-from exe_mkdir import mkdir
 
-root = Folder('/', 'root')
-#print(root.get_permissions())
+root = Folder('', 'root')
+mkdir(['mkdir', 'folder1'], 'root', root)
+mkdir(['mkdir', 'folder2'], 'root', root)
 
-root.add_folder('new_folder', 'root')
 
-mkdir(root, ['mkdir', 'new_folder2'], 'root')
+cwd = cd('folder1', 'root', root)
+print(cwd)
 
 print(root)
 

@@ -1,11 +1,3 @@
-class Item:
-    def __init__(self, name):
-        self.name = name
-
-    # create an add child method
-    def add_child(self, name):
-        pass
-
 class File():
     # group owner, permissions
     def __init__(self, name, owner):
@@ -47,13 +39,12 @@ class File():
 
 class Folder():
     # contains links to more items
-    def __init__(self, name: str, owner: str):
-
-        #super().__init__(self, name)
+    def __init__(self, name, owner, parent=None):
 
         self.items = []
+        self.parent = None
 
-        self.name = name
+        self.name = name+"/"
         self.owner = owner
 
         # Read, Write, Execute
@@ -63,10 +54,8 @@ class Folder():
     def __str__(self):
         return str(self.__class__) + ": " + str(self.__dict__)
 
-    def add_parent_directory(self) -> None:
-        # only use if folder is not root
-        self.items.append('.')
-        self.items.append('..')
+    def get_parent(self):
+        return self.parent
 
     def get_name(self) -> str:
         return self.name
@@ -74,17 +63,8 @@ class Folder():
     def get_items(self) -> list:
         return self.items
 
-    def add_folder(self, name, user):
-        # add children
-        new_name = name+'/'
-        new_folder = Folder(new_name, user)
-        self.items.append(new_folder)
-
-    def add_file(self, name):
-        self.items.append(name)
-
-    def touch(self, name, location='.'):
-        self.items.append(File(name))
+    def get_children(self):
+        return self.children
 
     def get_permissions(self) -> str:
         owner_str = ''
@@ -103,5 +83,38 @@ class Folder():
 
         return 'd' + owner_str + other_str
 
-    def touch(self):
-        pass
+    def add_item(self, name, user):
+        # add children
+        self.items.append(name)
+
+    def add_parent_directory(self) -> None:
+        # only use if folder is not root
+        self.items.append('.')
+        self.items.append('..')
+
+    def add_parent(self, parent):
+        self.parent = parent
+
+
+def cd(name, user, parent_folder):
+    for folder in parent_folder.items:
+        if type(folder) == Folder:
+            if folder.get_name() == name:
+                return folder
+
+def mkdir(cmds, user, parent_folder):
+    new_folder = Folder(cmds[1], user, parent_folder) 
+    new_folder.add_parent_directory()
+    new_folder.add_parent(parent_folder)
+    return parent_folder.add_item(new_folder, user)
+
+def touch(parent_folder, cmds, user):
+    parent_folder.add_item(cmds[1], user)
+    
+def pwd(current_directory):
+    ls = []
+    while current_directory.get_parent() != None:
+        ls.append(current_directory.get_parent())
+        current_directory = current_directory.get_parent()
+
+    return ls
