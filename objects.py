@@ -113,12 +113,14 @@ def cd(name, user, parent_folder, root):
         return root
     name += '/'
     for folder in parent_folder.get_items():
+        if type(folder) == File and folder.get_name() == name[:-1]:
+            print("cd: Destination is a file")
+            return parent_folder
+            
         if folder.get_name() == name:
             if type(folder) == Folder:
                 return folder
-            elif type(folder) == File:
-                print("cd: Destination is a file")
-                return parent_folder
+
     print("cd: No such file or directory")
     return parent_folder
 
