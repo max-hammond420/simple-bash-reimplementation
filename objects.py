@@ -10,9 +10,12 @@ class File():
         self.owner_permissions = [True, True, False]
         self.other_permissions = [True, False, False]
 
+    def __str__(self):
+        return self.name
+
     def get_name(self):
         return self.name
-    
+
     def get_permissions(self) -> str:
         owner_str = ''
         other_str = ''
@@ -32,7 +35,7 @@ class File():
     def check_modify_permissions(self) -> bool:
         # returns True if current user is able to modify the file
         pass
-    
+
     def chmod(self, modify_string):
         pass
 
@@ -53,6 +56,7 @@ class Folder():
 
     def __str__(self):
         return str(self.__class__) + ": " + str(self.__dict__)
+        #return self.name
 
     def get_parent(self):
         return self.parent
@@ -62,9 +66,6 @@ class Folder():
 
     def get_items(self) -> list:
         return self.items
-
-    def get_children(self):
-        return self.children
 
     def get_permissions(self) -> str:
         owner_str = ''
@@ -97,24 +98,60 @@ class Folder():
 
 
 def cd(name, user, parent_folder):
-    for folder in parent_folder.items:
-        if type(folder) == Folder:
-            if folder.get_name() == name:
+    if name == '.':
+        return parent_folder
+    elif name == '..':
+        if parent_folder.parent == None:
+            print("cd: No such file or directory")
+            return parent_folder
+        return parent_folder.parent
+    name += '/'
+    for folder in parent_folder.get_items():
+        if folder.get_name() == name:
+            if type(folder) == Folder:
                 return folder
+            else:
+                print("cd: Destination is a file")
+                return parent_folder
+    print("cd: No such file or directory")
+    return parent_folder
+
+def cd_dashp(name, user, parent_folder):
+    pass
+
+def ls(folder):
+    for item in folder.get_items():
+        print(item)
 
 def mkdir(cmds, user, parent_folder):
-    new_folder = Folder(cmds[1], user, parent_folder) 
-    new_folder.add_parent_directory()
+    new_folder = Folder(cmds[1], user, parent_folder)
+    #new_folder.add_parent_directory()
     new_folder.add_parent(parent_folder)
     return parent_folder.add_item(new_folder, user)
 
-def touch(parent_folder, cmds, user):
-    parent_folder.add_item(cmds[1], user)
-    
+def touch(parent_folder, name, user):
+    new_file = File(name, user)
+    parent_folder.add_item(new_file, user)
+
 def pwd(current_directory):
-    ls = []
+    ls = [current_directory]
     while current_directory.get_parent() != None:
         ls.append(current_directory.get_parent())
         current_directory = current_directory.get_parent()
 
-    return ls
+    s = ''
+    ls_size = len(ls)
+    for i in range(len(ls)-1, -1, -1):
+        s += ls[i].get_name()
+
+    return s
+
+def ls(current_directory):
+    s = ''
+    for item in current_directory.get_items():
+        if type(item) == Folder:
+            s += (item.get_name()[:-1] + ' ')
+        else:
+            s += (item.get_name() + ' ')
+
+    return s

@@ -1,16 +1,15 @@
-from exe_mkdir import mkdir as mkdir
+from objects import *
 
-def execute(cmd: list) -> None:
+def execute(cmd: list, user, cwd) -> None:
     a = cmd[0]
     ### TODO Implement first
     if a == "pwd":
-        pass
-    elif a == "cd":
-        pass
+        print(pwd(cwd))
     elif a == "mkdir":
-        mkdir()
+        mkdir(cmd, user, cwd)
     elif a == "touch":
-        pass
+        touch(cwd, cmd[1], user)
+
 
     ### TODO Implement 2nd
     elif a == "cp":
@@ -34,5 +33,5 @@ def execute(cmd: list) -> None:
     elif a == "su":
         pass
     elif a == "ls":
-        pass
+        print(ls(cwd))
 
