@@ -30,7 +30,9 @@ def main():
                 if full_cmd[1][0] == '/':
                     cwd = root
                     full_cmd[1] = full_cmd[1][1:]
-                cwd = cd(full_cmd[1], current_user, cwd, root)
+                paths = get_every_folder(full_cmd[1])
+                for i in range(len(paths)):
+                    cwd = cd(paths[i], current_user, cwd, root)
 
             execute(full_cmd, current_user, cwd, root)
         elif full_cmd[0] == "exit":

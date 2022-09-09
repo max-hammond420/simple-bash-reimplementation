@@ -103,6 +103,7 @@ def get_every_folder(s):
     return s
 
 def cd(name, user, parent_folder, root):
+    ### NEED TO FUCKING IMPLEMENT THIS SHIT RECUSIVELY FUCK MY LIFE
     if name == '.':
         return parent_folder
     elif name == '..':
