@@ -67,6 +67,19 @@ class Folder():
     def get_items(self) -> list:
         return self.items
 
+    def get_item_names(self):
+        ls = []
+        for i in range(len(self.items)):
+            ls.append(self.items[i].get_name())
+        return ls
+
+    def get_child(self, name):
+        for i in range(len(self.get_item_names())):
+            if self.get_item_names()[i] == names:
+                return self.item[i]
+        return None
+
+
     def get_permissions(self) -> str:
         owner_str = ''
         other_str = ''
@@ -88,6 +101,12 @@ class Folder():
         # add children
         self.items.append(name)
 
+    def remove_item(self, name, user):
+        for i in range(self.children):
+            if self.children[i].get_name() == name:
+                self.children = self.children[:i-1] + self.children[i:]
+                break
+
     def add_parent_directory(self) -> None:
         # only use if folder is not root
         self.items.append('.')
@@ -101,6 +120,14 @@ def get_every_folder(s):
     # or a/b/c -> ['a', 'b', 'c']
     s = s.split('/')
     return s
+
+def parse_directory(directory, cwd, root):
+    directory = get_every_folder(directory)
+    if directory[0] == '':
+        cwd = root
+        directory = directory[1:]
+
+    return [cwd, directory]
 
 def cd(name, user, parent_folder, root):
     ### NEED TO FUCKING IMPLEMENT THIS SHIT RECUSIVELY FUCK MY LIFE
@@ -117,7 +144,7 @@ def cd(name, user, parent_folder, root):
         if type(folder) == File and folder.get_name() == name[:-1]:
             print("cd: Destination is a file")
             return parent_folder
-            
+
         if folder.get_name() == name:
             if type(folder) == Folder:
                 return folder
@@ -165,6 +192,7 @@ def mkdir_dashp(cwd, user, parent_folders):
         pass
 
 def touch(parent_folder, name, user):
+    # TODO implement paths
     new_file = File(name, user)
     parent_folder.add_item(new_file, user)
 
@@ -189,3 +217,46 @@ def ls(current_directory):
             s += (item.get_name() + ' ')
 
     return s
+
+def cp(src, dst, user, cwd, root):
+    src = parse_directory(src, cwd, root)
+    dst = parse_directory(dst, cwd, root)
+    # check if src is a file
+    # src_cwd is a Folder object
+    src_cwd = src[0]
+
+    # src_path is a list of strings
+    src_path = src[1]
+    print(src_cwd.get_items())
+    for i in range(len(src_path[:-1])):
+        src_cwd_items = src_cwd.get_item_names()
+        if src_path[i] in src_cwd_items():
+            if type(src_cwd(get_child(src_path[i]))) == Folder:
+                src_cwd = src_cwd(get_child(src_path[i]))
+            else:
+                print("cp: Source is a file")
+                return None
+        else:
+            print("cp: Source doesnt exist")
+            return None
+
+    if src_path[-1] in src_path[-2].get_item_names():
+        cp_file = src_path.get_child(src_path[-1])
+        if type(cp_file) != File:
+            print("cp: Source is a file")
+            return None
+    else:
+        print("cp: Source doesn't exist")
+        return None
+            
+
+    # check if dst exists
+
+def mv(src, dst, user):
+    pass
+
+def rm(path, dst, user):
+    pass
+
+def rmdir(directory, user):
+    pass

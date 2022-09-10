@@ -2,7 +2,7 @@ from objects import *
 
 def execute(cmd: list, user, cwd, root) -> None:
     a = cmd[0]
-    ### TODO Implement first
+    # Part 1
     if a == "pwd":
         if pwd(cwd) == pwd(root):
             print(pwd(cwd))
@@ -24,7 +24,7 @@ def execute(cmd: list, user, cwd, root) -> None:
 
     ### TODO Implement 2nd
     elif a == "cp":
-        pass
+        cp(cmd[1], cmd[2], user, cwd, root)
     elif a == "mv":
         pass
     elif a == "rm":
