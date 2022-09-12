@@ -1,5 +1,6 @@
 from objects import *
 
+
 def execute(cmd: list, user, cwd, root) -> None:
     a = cmd[0]
     # Part 1
@@ -21,8 +22,7 @@ def execute(cmd: list, user, cwd, root) -> None:
     elif a == "touch":
         touch(cwd, cmd[1], user)
 
-
-    ### TODO Implement 2nd
+    # TODO Implement 2nd
     elif a == "cp":
         cp(cmd[1], cmd[2], user, cwd, root)
     elif a == "mv":
@@ -32,7 +32,7 @@ def execute(cmd: list, user, cwd, root) -> None:
     elif a == "rmdir":
         pass
 
-    ### TODO implement 3rd
+    # TODO implement 3rd
     elif a == "chmod":
         pass
     elif a == "chown":
