@@ -1,7 +1,7 @@
 class File():
     # group owner, permissions
     def __init__(self, name, owner):
-        #super().__init__(self, name, user)
+        # super().__init__(self, name, user)
 
         self.name = name
         self.owner = owner
@@ -55,7 +55,7 @@ class Folder():
         self.other_permissions = [True, False, True]
 
     def __str__(self):
-        #return str(self.__class__) + ": " + str(self.__dict__)
+        # return str(self.__class__) + ": " + str(self.__dict__)
         return self.name
 
     def get_parent(self):
@@ -75,10 +75,9 @@ class Folder():
 
     def get_child(self, name):
         for i in range(len(self.get_item_names())):
-            if self.get_item_names()[i] == names:
-                return self.item[i]
+            if self.get_item_names()[i] == name:
+                return self.items[i]
         return None
-
 
     def get_permissions(self) -> str:
         owner_str = ''
@@ -94,7 +93,6 @@ class Folder():
                 other_str += perms[i]
             else:
                 other_str += '-'
-
         return 'd' + owner_str + other_str
 
     def add_item(self, name, user):
@@ -115,11 +113,13 @@ class Folder():
     def add_parent(self, parent):
         self.parent = parent
 
+
 def get_every_folder(s):
     # takes in string /a/b/c -> ['', 'a', 'b', 'c']
     # or a/b/c -> ['a', 'b', 'c']
     s = s.split('/')
     return s
+
 
 def parse_directory(directory, cwd, root):
     directory = get_every_folder(directory)
@@ -129,12 +129,12 @@ def parse_directory(directory, cwd, root):
 
     return [cwd, directory]
 
+
 def cd(name, user, parent_folder, root):
-    ### NEED TO FUCKING IMPLEMENT THIS SHIT RECUSIVELY FUCK MY LIFE
     if name == '.':
         return parent_folder
     elif name == '..':
-        if parent_folder.parent == None:
+        if parent_folder.parent is None:
             return root
         return parent_folder.parent
     if name == '':
@@ -152,9 +152,13 @@ def cd(name, user, parent_folder, root):
     print("cd: No such file or directory")
     return parent_folder
 
+
+"""
 def ls(folder):
     for item in folder.get_items():
         print(item)
+"""
+
 
 def mkdir(cwd, user, parent_folders):
     if parent_folders[0] == '':
@@ -174,12 +178,13 @@ def mkdir(cwd, user, parent_folders):
                 return None
     else:
         parent_folders = [cwd]
-    #print(new_folder_name, parent_folders)
+    # print(new_folder_name, parent_folders)
     new_folder = Folder(new_folder_name, user, cwd)
-    #print(parent_folders[-1])
-    #print(cwd)
+    # print(parent_folders[-1])
+    # print(cwd)
     new_folder.add_parent(cwd)
     return cwd.add_item(new_folder, user)
+
 
 def mkdir_dashp(cwd, user, parent_folders):
     # iterate over parent_folders,
@@ -191,22 +196,24 @@ def mkdir_dashp(cwd, user, parent_folders):
     for i in range(len(parent_folders)):
         pass
 
+
 def touch(parent_folder, name, user):
     # TODO implement paths
     new_file = File(name, user)
     parent_folder.add_item(new_file, user)
 
+
 def pwd(current_directory):
     ls = [current_directory]
-    while current_directory.get_parent() != None:
+    while current_directory.get_parent() is not None:
         ls.append(current_directory.get_parent())
         current_directory = current_directory.get_parent()
 
     s = ''
-    ls_size = len(ls)
     for i in range(len(ls)-1, -1, -1):
         s += ls[i].get_name()
     return s
+
 
 def ls(current_directory):
     s = ''
@@ -217,6 +224,7 @@ def ls(current_directory):
             s += (item.get_name() + ' ')
 
     return s
+
 
 def cp(src, dst, user, cwd, root):
     src = parse_directory(src, cwd, root)
@@ -231,8 +239,8 @@ def cp(src, dst, user, cwd, root):
     for i in range(len(src_path[:-1])):
         src_cwd_items = src_cwd.get_item_names()
         if src_path[i] in src_cwd_items():
-            if type(src_cwd(get_child(src_path[i]))) == Folder:
-                src_cwd = src_cwd(get_child(src_path[i]))
+            if type(src_cwd.get_child(src_path[i])) == Folder:
+                src_cwd = src_cwd.get_child(src_path[i])
             else:
                 print("cp: Source is a file")
                 return None
@@ -248,7 +256,6 @@ def cp(src, dst, user, cwd, root):
     else:
         print("cp: Source doesn't exist")
         return None
-            
 
     # check if dst exists
 
@@ -256,8 +263,14 @@ def cp(src, dst, user, cwd, root):
 def mv(src, dst, user):
     pass
 
+
 def rm(path, dst, user):
     pass
 
+
 def rmdir(directory, user):
+    pass
+
+
+def chmod():
     pass

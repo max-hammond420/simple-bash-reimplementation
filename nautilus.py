@@ -1,10 +1,12 @@
 from objects import *
 from execute import execute
 
+
 def display_prompt(user, cwd):
     if cwd == '/':
         return f"{user}:{cwd}$ "
-    return f"{user}:{cwd[:-1]}$ " 
+    return f"{user}:{cwd[:-1]}$ "
+
 
 def main():
     cmds = ['pwd', 'cd', 'mkdir', 'touch',
@@ -14,8 +16,8 @@ def main():
     users = ['root']
     current_user = users[0]
     root = Folder('', current_user)
-    cwd = root
 
+    cwd = root
     while True:
 
         cmd = str(input(display_prompt(current_user, pwd(cwd))))
@@ -40,6 +42,7 @@ def main():
         else:
             print(f"{full_cmd[0]}: command not found")
     print(f"bye, {current_user}")
+
 
 if __name__ == '__main__':
     main()
