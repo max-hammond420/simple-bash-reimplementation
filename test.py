@@ -1,23 +1,17 @@
-from objects import *
+from objects import File, Folder
+from commands import *
 
-#root = Folder('', 'root')
-#mkdir(['mkdir', 'folder1'], 'root', root)
-#mkdir(['mkdir', 'folder2'], 'root', root)
-#
-#
-#cwd = cd('folder1', 'root', root)
-#
-#print(cwd)
-#print(pwd(cwd))
-#print(ls(cwd))
-#print()
-#print(ls(root))
-#print()
-#print(root)
 
-s = '/a/b/c/d'
-def f(x):
-    x = x.split('/')
-    return x
+root = Folder('', 'root')
 
-print(f(s))
+a = Folder('a', 'root')
+b = Folder('b', 'root')
+c = File('c', 'root')
+
+root.add_item(a, 'root')
+root.add_item(b, 'root')
+root.add_item(c, 'root')
+
+print(root.get_child(a))
+for i in range(len(root.items)):
+    print('root.items[i]', type(root.items[i]))

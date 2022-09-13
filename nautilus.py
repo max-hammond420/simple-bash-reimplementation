@@ -1,5 +1,6 @@
-from objects import *
+from objects import File, Folder
 from execute import execute
+from commands import *
 
 
 def display_prompt(user, cwd):
