@@ -7,7 +7,7 @@ def execute(cmd: list, user, cwd, root) -> None:
     args = []
     if len(cmd) > 1:
         args = cmd[1:]
-    # print(args)
+
     # Part 1
     if a == "pwd":
         print(pwd(cwd, root))

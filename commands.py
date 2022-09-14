@@ -103,9 +103,9 @@ def cd(args, cwd, user, root):
     # iterate through path
     # check that cwd.get_child(path[i]) is not None, else, error
     # return path[-2].get_child(path[-1])
-    if len(args) != 1:
+    if len(args) != 1 or len(args) == 0:
         print("cd: Invalid syntax")
-        return None
+        return cwd
 
     path = args[0]
     path = get_absolute_path(path, cwd, root)
