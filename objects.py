@@ -1,10 +1,11 @@
 class File():
     # group owner, permissions
-    def __init__(self, name, owner):
+    def __init__(self, name, owner, parent):
         # super().__init__(self, name, user)
 
         self.name = name
         self.owner = owner
+        self.parent = parent
 
         # Read, Write, Execute
         self.owner_permissions = [True, True, False]
@@ -15,6 +16,9 @@ class File():
 
     def get_name(self):
         return self.name
+
+    def get_parent(self):
+        return self.parent
 
     def get_permissions(self) -> str:
         owner_str = ''
@@ -47,7 +51,7 @@ class Folder():
         self.items = []
         self.parent = None
 
-        self.name = name+"/"
+        self.name = name
         self.owner = owner
 
         # Read, Write, Execute
@@ -67,7 +71,14 @@ class Folder():
     def get_items(self) -> list:
         return self.items
 
+    def get_item_names(self) -> list:
+        ls = []
+        for i in range(len(self.items)):
+            ls.append(self.items[i].get_name())
+        return ls
+
     def get_child(self, name):
+        # name: str
         for i in range(len(self.items)):
             if self.items[i].get_name() == name:
                 return self.items[i]
@@ -91,18 +102,19 @@ class Folder():
 
     def add_item(self, name, user):
         # add children
+        ls = []
+        for i in range(len(self.items)):
+            ls.append(self.items[i].get_name())
+        if name.get_name() in ls:
+            return None
+
         self.items.append(name)
 
     def remove_item(self, name, user):
-        for i in range(self.children):
-            if self.children[i].get_name() == name:
-                self.children = self.children[:i-1] + self.children[i:]
+        for i in range(len(self.items)):
+            if self.items[i].get_name() == name:
+                self.items.pop(i)
                 break
-
-    def add_parent_directory(self) -> None:
-        # only use if folder is not root
-        self.items.append('.')
-        self.items.append('..')
 
     def add_parent(self, parent):
         self.parent = parent

@@ -26,17 +26,7 @@ def main():
         full_cmd = cmd.split(' ')
         if full_cmd[0] in cmds:
             if full_cmd[0] == 'cd':
-                if len(full_cmd) <= 1:
-                    print("cd: Invalid syntax")
-                    continue
-
-                if full_cmd[1][0] == '/':
-                    cwd = root
-                    full_cmd[1] = full_cmd[1][1:]
-                paths = get_every_folder(full_cmd[1])
-                for i in range(len(paths)):
-                    cwd = cd(paths[i], current_user, cwd, root)
-
+                cwd = cd(full_cmd[1:], cwd, current_user, root)
             execute(full_cmd, current_user, cwd, root)
         elif full_cmd[0] == "exit":
             break
