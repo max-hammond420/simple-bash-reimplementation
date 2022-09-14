@@ -106,7 +106,7 @@ class Folder():
         for i in range(len(self.items)):
             ls.append(self.items[i].get_name())
         if name.get_name() in ls:
-            return None
+            return False
 
         self.items.append(name)
 

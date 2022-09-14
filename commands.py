@@ -5,11 +5,11 @@ from objects import File, Folder
 def get_absolute_path(directory, cwd, root):
     # TODO: check functionality
     # directory: str e.g. /a/b/c or a/b/c
-    # returns: [cwd: Folder, destination: list of child directories of root]
+    # returns: [destination: list of child directories of root]
     # doesn't care if folder isnt syntactically correct
     directory = directory.split('/')
     if directory[0] == '':
-        return [root, directory[1:]]
+        return directory[1:]
 
     destination = []
     ls = [cwd]
@@ -21,28 +21,31 @@ def get_absolute_path(directory, cwd, root):
 
     for i in range(len(ls)-1, -1, -1):
         destination.append(ls[i].get_name())
+    destination.pop(0)
 
-    return [root, destination]
+    return destination + directory
 
 
-def conv_path_to_obj(path):
-    # path is [root, [path]]
+def conv_path_to_obj(path, root):
+    # path is ['a', 'b', 'c']
     # iterates through an absolute path,
     # returns [list of child Folder objects] if path is correct
     # else returns False
 
     # intended to leave out the last file path from user input, depending on
     # the use of the parent function
-    print('36', path)
-    root = path[0]
-    file_path = path[1]
+    file_path = path
 
     path_objects = [root]
     cwd = root
 
     for i in range(len(file_path)):
         cwd_item_names = cwd.get_item_names()
-        if file_path[i] in cwd_item_names:
+        if file_path[i] == '.':
+            cwd = cwd
+        elif file_path[i] == '..':
+            cwd = cwd.get_parent()
+        elif file_path[i] in cwd_item_names:
             cwd = cwd.get_child(file_path[i])
             path_objects.append(cwd)
         else:
@@ -68,7 +71,7 @@ def pwd(current_directory):
         ls.append(current_directory.get_parent())
         current_directory = current_directory.get_parent()
 
-    s = ''
+    s = '/'
     for i in range(len(ls)-1, -1, -1):
         s += ls[i].get_name()+'/'
     return s
@@ -90,26 +93,19 @@ def cd(args, cwd, user, root):
     # check that cwd.get_child(path[i]) is not None, else, error
     # return path[-2].get_child(path[-1])
     if len(args) != 1:
-        print('cd: Invalid syntax')
+        print("cd: Invalid syntax")
+        return None
 
     path = args[0]
-    path = parse_destination(path, cwd, root)
-    print('path', path)
-
-    path_check = check_path(path[:-1], root)
-    if type(path_check) == bool:
+    path = get_absolute_path(path, cwd, root)
+    path_obj = conv_path_to_obj(path, root)
+    if path_obj is None:
         print("cd: No such file or directory")
         return cwd
 
-    for i in range(len(path)):
-        if path[i] == '..':
-            cwd = cwd.get_parent()
-        elif path[i] == '.':
-            cwd = cwd
-        else:
-            cwd = path[i]
+    path = check_valid_path(path_obj)
 
-    return cwd
+    return path_obj[-1]
 
 
 def mkdir(args, cwd, user, root):
@@ -122,17 +118,43 @@ def mkdir(args, cwd, user, root):
         args.remove('-p')
 
     if len(args) != 1:
-        print("mkdir: invalid syntax")
+        print("mkdir: Invalid syntax")
+        return None
 
-    path = args[0][:-1]
+    path = args[0]
     new_folder_name = args[0][-1]
 
     path = get_absolute_path(path, cwd, root)
-    path = conv_path_to_obj(path)
-    if path is None:
+    new_folder_name = path[-1]
+    path = path[:-1]
+
+    path = conv_path_to_obj(path, root)
+    if not check_valid_path(path):
         print("mkdir: Ancestor directory does not exist")
         return None
-    path = check_valid_path(conv_path_to_obj(path))
-    print('136', path)
 
     new_folder = Folder(new_folder_name, user, path[-1])
+    parent = path[-1].add_item(new_folder, user)
+    if parent is False:
+        print("mkdir: File exists")
+        return None
+
+
+def touch():
+    pass
+
+
+def cp():
+    pass
+
+
+def mv():
+    pass
+
+
+def rm():
+    pass
+
+
+def rmdir():
+    pass
