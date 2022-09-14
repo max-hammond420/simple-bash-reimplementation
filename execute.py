@@ -10,6 +10,7 @@ def execute(cmd: list, user, cwd, root) -> None:
 
     # Part 1
     if a == "pwd":
+        working_d = pwd(cwd, root)
         print(pwd(cwd, root))
     elif a == "mkdir":
         mkdir(args, cwd, user, root)
