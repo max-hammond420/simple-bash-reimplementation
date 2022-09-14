@@ -3,10 +3,10 @@ from execute import execute
 from commands import *
 
 
-def display_prompt(user, cwd):
-    if cwd == '/':
-        return f"{user}:{cwd}$ "
-    return f"{user}:{cwd[:-1]}$ "
+def display_prompt(user, cwd, root):
+    if cwd == root:
+        return f"{user}:{pwd(cwd, root)}$ "
+    return f"{user}:{pwd(cwd, root)[:-1]}$ "
 
 
 def main():
@@ -21,7 +21,7 @@ def main():
     cwd = root
     while True:
 
-        cmd = str(input(display_prompt(current_user, pwd(cwd))))
+        cmd = str(input(display_prompt(current_user, cwd, root)))
 
         full_cmd = cmd.split(' ')
         if full_cmd[0] in cmds:

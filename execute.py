@@ -10,14 +10,11 @@ def execute(cmd: list, user, cwd, root) -> None:
     # print(args)
     # Part 1
     if a == "pwd":
-        if pwd(cwd) == pwd(root):
-            print(pwd(cwd))
-        else:
-            print(pwd(cwd)[:-1])
+        print(pwd(cwd, root))
     elif a == "mkdir":
         mkdir(args, cwd, user, root)
     elif a == "touch":
-        touch(cwd, cmd[1], user)
+        touch(args, cwd, user, root)
 
     # TODO Implement 2nd
     elif a == "cp":

@@ -43,8 +43,10 @@ def conv_path_to_obj(path, root):
         cwd_item_names = cwd.get_item_names()
         if file_path[i] == '.':
             cwd = cwd
+            path_objects.append(cwd)
         elif file_path[i] == '..':
             cwd = cwd.get_parent()
+            path_objects.append(cwd)
         elif file_path[i] in cwd_item_names:
             cwd = cwd.get_child(file_path[i])
             path_objects.append(cwd)
@@ -65,16 +67,19 @@ def check_valid_path(path):
     return True
 
 
-def pwd(current_directory):
-    ls = [current_directory]
-    while current_directory.get_parent() is not None:
-        ls.append(current_directory.get_parent())
-        current_directory = current_directory.get_parent()
+def pwd(cwd, root):
+    ls = [cwd.get_name()]
 
-    s = '/'
-    for i in range(len(ls)-1, -1, -1):
-        s += ls[i].get_name()+'/'
-    return s
+    # get cwd in a list, append directory
+    while cwd.get_parent() is not None:
+        ls.append(cwd.get_parent().get_name())
+        cwd = cwd.get_parent()
+
+    path = ''
+    for i in range(len(ls)):
+        path += ls[len(ls)-1-i] + '/'
+
+    return path
 
 
 def ls(current_directory):
@@ -134,14 +139,43 @@ def mkdir(args, cwd, user, root):
         return None
 
     new_folder = Folder(new_folder_name, user, path[-1])
+    new_folder.add_parent(path[-1])
     parent = path[-1].add_item(new_folder, user)
     if parent is False:
         print("mkdir: File exists")
         return None
 
 
-def touch():
-    pass
+def touch(args, cwd, user, root):
+    # iterate through path[:-2]
+    # if path[i+1] is not a child of path[i], return error msg
+    # if add path[-1] to path[-2].items
+    dash_p = False
+    if '-p' in args:
+        dash_p = True
+        args.remove('-p')
+
+    if len(args) != 1:
+        print("mkdir: Invalid syntax")
+        return None
+
+    path = args[0]
+    new_folder_name = args[0][-1]
+
+    path = get_absolute_path(path, cwd, root)
+    new_folder_name = path[-1]
+    path = path[:-1]
+
+    path = conv_path_to_obj(path, root)
+    if not check_valid_path(path):
+        print("mkdir: Ancestor directory does not exist")
+        return None
+
+    new_folder = File(new_folder_name, user, path[-1])
+    parent = path[-1].add_item(new_folder, user)
+    if parent is False:
+        print("mkdir: File exists")
+        return None
 
 
 def cp():
