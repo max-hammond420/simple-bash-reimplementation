@@ -36,6 +36,9 @@ def conv_path_to_obj(path, root):
     # the use of the parent function
     file_path = path
 
+    if file_path == ['']:
+        return [root]
+
     path_objects = [root]
     cwd = root
 
@@ -45,8 +48,11 @@ def conv_path_to_obj(path, root):
             cwd = cwd
             path_objects.append(cwd)
         elif file_path[i] == '..':
-            cwd = cwd.get_parent()
-            path_objects.append(cwd)
+            if cwd == root:
+                path_objects.append(cwd)
+            else:
+                cwd = cwd.get_parent()
+                path_objects.append(cwd)
         elif file_path[i] in cwd_item_names:
             cwd = cwd.get_child(file_path[i])
             path_objects.append(cwd)
