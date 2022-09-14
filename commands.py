@@ -114,7 +114,7 @@ def cd(args, cwd, user, root):
         print("cd: No such file or directory")
         return cwd
 
-    if type(path[-1]) is not Folder:
+    if type(path_obj[-1]) is not Folder:
         print("cd: Destination is a file")
         return cwd
 
