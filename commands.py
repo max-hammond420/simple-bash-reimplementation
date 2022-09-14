@@ -85,6 +85,9 @@ def pwd(cwd, root):
     for i in range(len(ls)):
         path += ls[len(ls)-1-i] + '/'
 
+    if len(path) > 1:
+        path = path[:-1]
+
     return path
 
 
