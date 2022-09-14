@@ -114,6 +114,10 @@ def cd(args, cwd, user, root):
         print("cd: No such file or directory")
         return cwd
 
+    if type(path[-1]) is not Folder:
+        print("cd: Destination is a file")
+        return cwd
+
     path = check_valid_path(path_obj)
 
     return path_obj[-1]
