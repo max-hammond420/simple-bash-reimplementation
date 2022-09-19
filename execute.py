@@ -38,4 +38,4 @@ def execute(cmd: list, user, cwd, root) -> None:
     elif a == "su":
         pass
     elif a == "ls":
-        print(ls(cwd))
+        print(ls(args, cwd, user, root))

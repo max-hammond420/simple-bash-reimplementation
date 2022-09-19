@@ -20,6 +20,9 @@ class File():
     def get_parent(self):
         return self.parent
 
+    def get_owner(self):
+        return self.owner
+
     def get_permissions(self) -> str:
         owner_str = ''
         other_str = ''
@@ -83,6 +86,9 @@ class Folder():
             if self.items[i].get_name() == name:
                 return self.items[i]
         return None
+
+    def get_owner(self):
+        return self.owner
 
     def get_permissions(self) -> str:
         owner_str = ''

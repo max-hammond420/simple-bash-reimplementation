@@ -94,14 +94,56 @@ def pwd(cwd, root):
     return path
 
 
-def ls(current_directory):
-    s = ''
-    for item in current_directory.get_items():
-        if type(item) == Folder:
-            s += (item.get_name() + ' ')
-        else:
-            s += (item.get_name() + ' ')
+def ls(args, cwd, user, root):
+    dash_a = False
+    dash_l = False
+    dash_d = False
 
+    if '-a' in args:
+        dash_a = True
+        args.remove('-a')
+    elif '-l' in args:
+        dash_l = True
+        args.remove('-l')
+    elif '-d' in args:
+        dash_d = True
+        args.remove('-d')
+
+    if len(args) != 0 and len(args) != 1:
+        print("ls: Invalid Syntax")
+        return None
+
+    if len(args) == 1:
+        path = get_absolute_path(args[0], cwd, root)
+        path = conv_path_to_obj(path, root)
+        cwd = path[-1]
+
+    """
+    if check_valid_path(cwd) is False:
+        print("ls: No such file or directory")
+        return None
+    """
+
+    items_str = cwd.get_item_names()
+    items_str = sorted(items_str)
+
+    items_obj = cwd.get_items()
+
+    if dash_a is False:
+        for i in range(len(items_str)):
+            if items_str[i][0] == '.':
+                items_str.pop(i)
+
+    if dash_l is True:
+        for i in range(len(items_obj)):
+            items_obj[i] = items_obj[i].get_permissions()+" "+items_obj[i].get_owner()+" "+items_obj[i].get_name()
+
+    if dash_l is True:
+        return "\n".join(map(str, items_obj))
+
+    s = ''
+    for i in range(len(items_str)):
+        s += items_str[i] + ' '
     return s
 
 
