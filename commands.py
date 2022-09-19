@@ -344,6 +344,10 @@ def rmdir(args, cwd, root, user):
         print("rmdir: No such file or directory")
         return None
 
+    if child == cwd:
+        print("rmdir: Cannot remove pwd")
+        return None
+
     if type(child) is File:
         print("rmdir: Not a directory")
         return None
