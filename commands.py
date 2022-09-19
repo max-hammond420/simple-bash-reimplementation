@@ -335,13 +335,13 @@ def rmdir(args, cwd, root, user):
 
     # check if path is valid
     if check_valid_path(path) is False:
-        print("rmdir: No such file")
+        print("rmdir: No such file or directory")
         return None
 
     child = path[-1].get_child(rm_file)
 
     if child is None:
-        print("rmdir: No such file")
+        print("rmdir: No such file or directory")
         return None
 
     if type(child) is File:
