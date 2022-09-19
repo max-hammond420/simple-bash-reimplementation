@@ -234,8 +234,48 @@ def cp(args, cwd, root, user):
     parent = dst[-1].add_item(new_file, user)
 
 
-def mv():
-    pass
+def mv(args, cwd, root, user):
+    if len(args) != 2:
+        print("mv: Invalid syntax")
+        return None
+
+    src = get_absolute_path(args[0], cwd, root)
+    dst = get_absolute_path(args[1], cwd, root)
+
+    src_file_name = src[-1]
+    src = src[:-1]
+    dst_file_name = dst[-1]
+    dst = dst[:-1]
+
+    src = conv_path_to_obj(src, root)
+    dst = conv_path_to_obj(dst, root)
+
+    if type(dst[-1].get_child(dst_file_name)) is Folder:
+        print("mv: Destination is a directory")
+        return None
+
+    if dst[-1].get_child(dst_file_name) is not None:
+        print("mv: File exists")
+        return None
+
+    if type(src[-1].get_child(src_file_name)) is Folder:
+        print("mv: Source is a directory")
+        return None
+
+    if check_valid_path(src) is False:
+        print("mv: No such file")
+        return None
+
+    if check_valid_path(dst) is False:
+        print("mv: No such file or directory")
+        return None
+
+    if src[-1].get_child(src_file_name) is None:
+        print("mv: No such file")
+        return None
+
+    new_file = File(dst_file_name, user, dst[-1])
+    parent = dst[-1].add_item(new_file, user)
 
 
 def rm():
