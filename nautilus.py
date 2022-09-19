@@ -14,13 +14,10 @@ def adduser(users, current_user, full_cmd):
     if len(full_cmd) != 1:
         print("adduser: Invalid Syntax")
         return users
-
-    if current_user != 'root':
+    elif current_user != 'root':
         print("Must be root")
         return users
-
-    else:
-        return users.append(full_cmd[0])
+    return users.append(full_cmd[0])
 
 
 def deluser(users, current_user, full_cmd):
