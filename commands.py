@@ -206,6 +206,7 @@ def cp(args, cwd, root, user):
     src = conv_path_to_obj(src, root)
     dst = conv_path_to_obj(dst, root)
 
+    # Check errors in user input
     if type(dst[-1].get_child(dst_file_name)) is Folder:
         print("cp: Destination is a directory")
         return None
@@ -231,7 +232,7 @@ def cp(args, cwd, root, user):
         return None
 
     new_file = File(dst_file_name, user, dst[-1])
-    parent = dst[-1].add_item(new_file, user)
+    dst[-1].add_item(new_file, user)
 
 
 def mv(args, cwd, root, user):
