@@ -207,7 +207,11 @@ def cp(args, cwd, root, user):
     dst = conv_path_to_obj(dst, root)
 
     # Check errors in user input
-    print("dst:", dst, type(dst))
+    # print("dst:", dst, type(dst))
+
+    if (type(dst)) is None:
+        print("cp: No such file or directory")
+        return None
 
     if type(dst[-1].get_child(dst_file_name)) is Folder:
         print("cp: Destination is a directory")
