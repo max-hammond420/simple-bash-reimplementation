@@ -300,7 +300,7 @@ def rm(args, cwd, root, user):
 
     # convert path to folder objects
     path = conv_path_to_obj(path, root)
-    
+
     # check if path is valid
     if check_valid_path(path) is False:
         print("rm: No such file")
@@ -319,5 +319,33 @@ def rm(args, cwd, root, user):
     path[-1].remove_item(rm_file, user)
 
 
-def rmdir():
-    pass
+def rmdir(args, cwd, root, user):
+    if len(args) > 1:
+        print("rmdir: Invalid syntax")
+        return None
+    path = args[0]
+    path = get_absolute_path(path, cwd, root)
+
+    # separate into remove file and path
+    rm_file = path[-1]
+    path = path[:-1]
+
+    # convert path to folder objects
+    path = conv_path_to_obj(path, root)
+
+    # check if path is valid
+    if check_valid_path(path) is False:
+        print("rmdir: No such file")
+        return None
+
+    child = path[-1].get_child(rm_file)
+
+    if child is None:
+        print("rmdir: No such file")
+        return None
+
+    if type(child) is File:
+        print("rmdir: Is a file")
+        return None
+
+    path[-1].remove_item(rm_file, user)
