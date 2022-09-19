@@ -85,9 +85,6 @@ def pwd(cwd, root):
     for i in range(len(ls)):
         path += ls[len(ls)-1-i] + '/'
 
-    if len(path) > 1:
-        path = path[:-1]
-
     return path
 
 
@@ -163,13 +160,9 @@ def touch(args, cwd, user, root):
     # iterate through path[:-2]
     # if path[i+1] is not a child of path[i], return error msg
     # if add path[-1] to path[-2].items
-    dash_p = False
-    if '-p' in args:
-        dash_p = True
-        args.remove('-p')
 
     if len(args) != 1:
-        print("mkdir: Invalid syntax")
+        print("touch: Invalid syntax")
         return None
 
     path = args[0]
@@ -181,18 +174,54 @@ def touch(args, cwd, user, root):
 
     path = conv_path_to_obj(path, root)
     if not check_valid_path(path):
-        print("mkdir: Ancestor directory does not exist")
+        print("touch: Ancestor directory does not exist")
         return None
 
     new_folder = File(new_folder_name, user, path[-1])
     parent = path[-1].add_item(new_folder, user)
     if parent is False:
-        print("mkdir: File exists")
+        print("touch: File exists")
         return None
 
 
-def cp():
-    pass
+def cp(args, cwd, root, user):
+    if len(args) != 2:
+        print("cp: Invalid syntax")
+        return None
+
+    src = get_absolute_path(args[0], cwd, root)
+    dst = get_absolute_path(args[1], cwd, root)
+
+    src_file_name = src[-1]
+    src = src[:-1]
+    dst_file_name = dst[-1]
+    dst = dst[:-1]
+
+    src = conv_path_to_obj(src, root)
+    dst = conv_path_to_obj(dst, root)
+
+    if check_valid_path(src) is False:
+        print("cp: No such file")
+        return None
+
+    if check_valid_path(dst) is False:
+        print("cp: No such file or directory")
+        return None
+
+    if src[-1].get_child(src_file_name) is None:
+        print("cp: No such file")
+        return None
+
+    if type(src[-1].get_child(src_file_name)) is Folder:
+        print("cp: Source is a directory")
+        return None
+
+    if dst[-1].get_child(dst_file_name) is not None:
+        print("cp: File exists")
+        return None
+
+    new_file = File(dst_file_name, user, dst[-1])
+    parent = dst[-1].add_item(new_file, user)
 
 
 def mv():

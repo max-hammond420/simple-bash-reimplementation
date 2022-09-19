@@ -10,7 +10,6 @@ def execute(cmd: list, user, cwd, root) -> None:
 
     # Part 1
     if a == "pwd":
-        working_d = pwd(cwd, root)
         print(pwd(cwd, root))
     elif a == "mkdir":
         mkdir(args, cwd, user, root)
@@ -19,9 +18,9 @@ def execute(cmd: list, user, cwd, root) -> None:
 
     # TODO Implement 2nd
     elif a == "cp":
-        cp(cmd[1], cmd[2], user, cwd, root)
+        cp(args, cwd, root, user)
     elif a == "mv":
-        mv(cmd[1], cmd[2], user, cwd, root)
+        mv(args, user, cwd, root)
     elif a == "rm":
         pass
     elif a == "rmdir":
