@@ -24,7 +24,7 @@ def execute(cmd: list, user, cwd, root) -> None:
     elif a == "rm":
         rm(args, cwd, root, user)
     elif a == "rmdir":
-        pass
+        rmdir(args, cwd, root, user)
 
     # TODO implement 3rd
     elif a == "chmod":
