@@ -58,7 +58,14 @@ def main():
                 cwd = cd(full_cmd[1:], cwd, current_user, root)
 
             elif full_cmd[0] == 'adduser':
-                users = adduser(users, current_user, full_cmd)
+                if len(full_cmd) == 2:
+                    if current_user == 'root'
+                        users.append(full_cmd[1])
+                    else:
+                        print("adduser: Must be root")
+                else:
+                    print("adduser: Invalid syntax")
+
 
             elif full_cmd[0] == 'deluser':
                 users = deluser(users, current_user, full_cmd)
