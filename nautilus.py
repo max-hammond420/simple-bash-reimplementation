@@ -39,9 +39,17 @@ def main():
                 else:
                     print("adduser: Invalid syntax")
 
-
             elif full_cmd[0] == 'deluser':
-                users = deluser(users, current_user, full_cmd)
+                if len(full_cmd) == 2:
+                    if current_user == 'root':
+                        if full_cmd[1] in users:
+                            users.remove(full_cmd[1])
+                        else:
+                            print("deluser: The user does not exist")
+                    else:
+                        print("deluser: Must be root")
+                else:
+                    print("deluser: Invalid syntax")
 
             elif full_cmd[0] == 'su':
                 if len(full_cmd) == 2:
