@@ -65,6 +65,8 @@ def conv_path_to_obj(path, root):
 def check_valid_path(path):
     # takes in file a list of file objects and returns true if it is a
     # valid path_check
+    if path == None:
+        return False
     for i in range(len(path)-1):
         if type(path[i]) is not Folder or type(path[i+1]) is not Folder:
             return False
@@ -144,7 +146,7 @@ def mkdir(args, cwd, user, root):
     path = path[:-1]
 
     path = conv_path_to_obj(path, root)
-    if not check_valid_path(path):
+    if check_valid_path(path) is False:
         print("mkdir: Ancestor directory does not exist")
         return None
 
