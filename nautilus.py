@@ -44,7 +44,6 @@ def main():
                 users = deluser(users, current_user, full_cmd)
 
             elif full_cmd[0] == 'su':
-                print(users)
                 if len(full_cmd) == 2:
                     if full_cmd[1] in users:
                         current_user = full_cmd[1]
