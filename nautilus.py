@@ -67,12 +67,12 @@ def main():
                 users = deluser(current_user, users, full_cmd[1:])
 
             elif full_cmd[0] == 'su':
-                if len(full_cmd) > 2:
+                if len(full_cmd) == 2:
                     if full_cmd[1] in users:
                         current_user = full_cmd[1]
                     else:
                         print("su: Invalid user")
-                elif len(full_cmd) == 2:
+                elif len(full_cmd) == 1:
                     if 'root' in users:
                         current_user = 'root'
                     else:
