@@ -345,7 +345,7 @@ def rmdir(args, cwd, root, user):
         return None
 
     if type(child) is File:
-        print("rmdir: Is a file")
+        print("rmdir: Not a directory")
         return None
 
     path[-1].remove_item(rm_file, user)
