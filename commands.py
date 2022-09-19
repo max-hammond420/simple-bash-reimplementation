@@ -274,6 +274,8 @@ def mv(args, cwd, root, user):
         print("mv: No such file")
         return None
 
+    src[-1].remove_item(src_file_name)
+
     new_file = File(dst_file_name, user, dst[-1])
     parent = dst[-1].add_item(new_file, user)
 
