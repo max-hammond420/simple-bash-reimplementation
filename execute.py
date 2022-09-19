@@ -20,9 +20,9 @@ def execute(cmd: list, user, cwd, root) -> None:
     elif a == "cp":
         cp(args, cwd, root, user)
     elif a == "mv":
-        mv(args, user, cwd, root)
+        mv(args, cwd, root, user)
     elif a == "rm":
-        pass
+        mv(args, cwd, root, user)
     elif a == "rmdir":
         pass
 

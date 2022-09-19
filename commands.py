@@ -280,7 +280,7 @@ def mv(args, cwd, root, user):
     parent = dst[-1].add_item(new_file, user)
 
 
-def rm():
+def rm(args, cwd, root, user):
     pass
 
 
