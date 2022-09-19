@@ -15,6 +15,7 @@ def adduser(users, current_user, full_cmd):
         print("adduser: Invalid Syntax")
         return users
 
+    print(current_user)
     if current_user != 'root':
         print("Must be root")
         return users
@@ -61,7 +62,6 @@ def main():
                 cwd = cd(full_cmd[1:], cwd, current_user, root)
 
             elif full_cmd[0] == 'adduser':
-                print(current_user)
                 users = adduser(current_user, users, full_cmd[1:])
 
             elif full_cmd[0] == 'deluser':
