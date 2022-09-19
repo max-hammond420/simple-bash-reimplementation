@@ -43,7 +43,14 @@ def main():
                 if len(full_cmd) == 2:
                     if current_user == 'root':
                         if full_cmd[1] in users:
-                            users.remove(full_cmd[1])
+                            if full_cmd[1] == 'root':
+                                print("WARNING: You are just about to delete the root account")
+                                print("Usually this is never required as it may render the whole system unusable")
+                                print("If you really want this, call deluser with parameter --force")
+                                print("(but this `deluser` does not allow `--force`, haha)")
+                                print("Stopping now without having performed any action")
+                            else:
+                                users.remove(full_cmd[1])
                         else:
                             print("deluser: The user does not exist")
                     else:
