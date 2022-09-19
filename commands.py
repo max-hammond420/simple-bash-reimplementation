@@ -356,3 +356,15 @@ def rmdir(args, cwd, root, user):
         return None
 
     path[-1].remove_item(rm_file, user)
+
+
+def adduser(args, user, users):
+    pass
+
+
+def deluser(args, user, users):
+    pass
+
+
+def su(args, user, users):
+    pass

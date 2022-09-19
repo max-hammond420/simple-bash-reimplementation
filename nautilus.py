@@ -10,6 +10,36 @@ def display_prompt(user, cwd, root):
     return s
 
 
+def adduser(users, current_user, full_cmd):
+    if len(full_cmd) != 1:
+        print("adduser: Invalid Syntax")
+        return users
+
+    if current_user != 'root':
+        print("Must be root")
+        return users
+
+    else:
+        return users.append(full_cmd[0])
+
+
+def deluser(users, current_user, full_cmd):
+    if len(full_cmd) != 1:
+        print("deluser: Invalid Syntax")
+        return users
+
+    if current_user != 'root':
+        print("Must be root")
+        return users
+
+    else:
+        if full_cmd[0] in users:
+            return users.remove(full_cmd[0])
+        else:
+            print("deluser: The user does not exist")
+            return users
+
+
 def main():
     cmds = ['pwd', 'cd', 'mkdir', 'touch',
             'cp', 'mv', 'rm', 'rmdir',
@@ -26,9 +56,19 @@ def main():
 
         full_cmd = cmd.split(' ')
         if full_cmd[0] in cmds:
+
             if full_cmd[0] == 'cd':
                 cwd = cd(full_cmd[1:], cwd, current_user, root)
-            execute(full_cmd, current_user, cwd, root)
+
+            elif full_cmd[0] == 'adduser':
+                users = adduser(current_user, users, full_cmd[1:])
+
+            elif full_cmd[0] == 'deluser':
+                users = deluser(current_user, users, full_cmd[1:])
+
+            else:
+
+                execute(full_cmd, current_user, cwd, root)
         elif full_cmd[0] == "exit":
             break
         else:
