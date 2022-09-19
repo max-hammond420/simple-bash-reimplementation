@@ -11,13 +11,13 @@ def display_prompt(user, cwd, root):
 
 
 def adduser(users, current_user, full_cmd):
-    if len(full_cmd) != 1:
+    if len(full_cmd) != 2:
         print("adduser: Invalid Syntax")
         return users
     elif current_user != 'root':
         print("Must be root")
         return users
-    return users.append(full_cmd[0])
+    return users.append(full_cmd[1])
 
 
 def deluser(users, current_user, full_cmd):
@@ -58,10 +58,10 @@ def main():
                 cwd = cd(full_cmd[1:], cwd, current_user, root)
 
             elif full_cmd[0] == 'adduser':
-                users = adduser(users, current_user, full_cmd[1:])
+                users = adduser(users, current_user, full_cmd)
 
             elif full_cmd[0] == 'deluser':
-                users = deluser(users, current_user, full_cmd[1:])
+                users = deluser(users, current_user, full_cmd)
 
             elif full_cmd[0] == 'su':
                 print(users)
