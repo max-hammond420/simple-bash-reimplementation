@@ -43,6 +43,8 @@ def conv_path_to_obj(path, root):
     cwd = root
 
     for i in range(len(file_path)):
+        if type(cwd) is File:
+            return None
         cwd_item_names = cwd.get_item_names()
         if file_path[i] == '.':
             cwd = cwd
@@ -65,7 +67,7 @@ def conv_path_to_obj(path, root):
 def check_valid_path(path):
     # takes in file a list of file objects and returns true if it is a
     # valid path_check
-    if path == None:
+    if path is None:
         return False
     for i in range(len(path)-1):
         if type(path[i]) is not Folder or type(path[i+1]) is not Folder:
@@ -87,6 +89,8 @@ def pwd(cwd, root):
     for i in range(len(ls)):
         path += ls[len(ls)-1-i] + '/'
 
+    if len(path) > 1:
+        path = path[:-1]
     return path
 
 

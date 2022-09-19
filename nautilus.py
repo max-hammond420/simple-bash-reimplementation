@@ -6,7 +6,8 @@ from commands import *
 def display_prompt(user, cwd, root):
     if cwd == root:
         return f"{user}:{pwd(cwd, root)}$ "
-    return f"{user}:{pwd(cwd, root)}$ "
+    s = f"{user}:{pwd(cwd, root)}$ "
+    return s
 
 
 def main():
