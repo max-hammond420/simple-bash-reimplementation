@@ -332,20 +332,19 @@ def rmdir(args, cwd, root, user):
 
     # convert path to folder objects
     path = conv_path_to_obj(path, root)
+    child = path[-1].get_child(rm_file)
+
+    if child == cwd:
+        print("rmdir: Cannot remove pwd")
+        return None
 
     # check if path is valid
     if check_valid_path(path) is False:
         print("rmdir: No such file or directory")
         return None
 
-    child = path[-1].get_child(rm_file)
-
     if child is None:
         print("rmdir: No such file or directory")
-        return None
-
-    if child == cwd:
-        print("rmdir: Cannot remove pwd")
         return None
 
     if type(child) is File:
