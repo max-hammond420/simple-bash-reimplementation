@@ -214,6 +214,10 @@ def cp(args, cwd, root, user):
         print("cp: File exists")
         return None
 
+    if type(src[-1].get_child(src_file_name)) is Folder:
+        print("cp: Source is a directory")
+        return None
+
     if check_valid_path(src) is False:
         print("cp: No such file")
         return None
@@ -224,10 +228,6 @@ def cp(args, cwd, root, user):
 
     if src[-1].get_child(src_file_name) is None:
         print("cp: No such file")
-        return None
-
-    if type(src[-1].get_child(src_file_name)) is Folder:
-        print("cp: Source is a directory")
         return None
 
     new_file = File(dst_file_name, user, dst[-1])
