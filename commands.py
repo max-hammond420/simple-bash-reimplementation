@@ -316,7 +316,7 @@ def rm(args, cwd, root, user):
         print("rm: Is a directory")
         return None
 
-    path[-1].remove_item(rm_file)
+    path[-1].remove_item(rm_file, user)
 
 
 def rmdir():
