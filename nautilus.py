@@ -15,8 +15,7 @@ def adduser(users, current_user, full_cmd):
         print("adduser: Invalid Syntax")
         return users
 
-    print(current_user)
-    if current_user != 'root':
+    if current_user[0] != 'root':
         print("Must be root")
         return users
 
@@ -29,7 +28,7 @@ def deluser(users, current_user, full_cmd):
         print("deluser: Invalid Syntax")
         return users
 
-    if current_user != 'root':
+    if current_user[0] != 'root':
         print("Must be root")
         return users
 
