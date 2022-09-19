@@ -22,7 +22,7 @@ def execute(cmd: list, user, cwd, root) -> None:
     elif a == "mv":
         mv(args, cwd, root, user)
     elif a == "rm":
-        mv(args, cwd, root, user)
+        rm(args, cwd, root, user)
     elif a == "rmdir":
         pass
 

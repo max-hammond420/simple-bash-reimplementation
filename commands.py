@@ -288,7 +288,35 @@ def mv(args, cwd, root, user):
 
 
 def rm(args, cwd, root, user):
-    pass
+    if len(path) > 1:
+        print("rm: Invalid syntax")
+        return None
+    path = args[0]
+    path = get_absolute_path(path, cwd, root)
+
+    # separate into remove file and path
+    rm_file = path[-1]
+    path = path[:-1]
+
+    # convert path to folder objects
+    path = conv_path_to_obj(path, root)
+    
+    # check if path is valid
+    if check_valid_path(path) is False:
+        print("rm: No such file")
+        return None
+
+    child = path[-1].get_child(rm_file)
+
+    if child is None:
+        print("rm: No such file")
+        return None
+
+    if type(child) is Folder:
+        print("rm: Is a directory")
+        return None
+
+    path[-1].remove_item(rm_file)
 
 
 def rmdir():
