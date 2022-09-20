@@ -80,7 +80,10 @@ def main():
 
                 execute(full_cmd, current_user, cwd, root)
         elif full_cmd[0] == "exit":
-            break
+            if len(full_cmd) != 1:
+                print("exit: Invalid syntax")
+            else:
+                break
         else:
             print(f"{full_cmd[0]}: Command not found")
     print(f"bye, {current_user}")
