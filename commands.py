@@ -387,7 +387,7 @@ def rmdir(args, cwd, root, user):
 
     # separate into remove file and path
     rm_file = path[-1]
-    path = path[:-1]
+    path = path[]
 
     # convert path to folder objects
     path = conv_path_to_obj(path, root)
@@ -397,6 +397,11 @@ def rmdir(args, cwd, root, user):
         return None
 
     child = path[-1].get_child(rm_file)
+
+    if child is not None:
+        if child.get_items() > 0:
+            print("Directory not empty")
+            return None
 
     if child is None:
         print("rmdir: Cannot remove pwd")
