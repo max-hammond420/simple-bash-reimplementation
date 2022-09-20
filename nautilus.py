@@ -78,7 +78,7 @@ def main():
         elif full_cmd[0] == "exit":
             break
         else:
-            print(f"{full_cmd[0]}: command not found")
+            print(f"{full_cmd[0]}: Command not found")
     print(f"bye, {current_user}")
 
 
