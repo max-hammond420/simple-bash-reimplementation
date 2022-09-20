@@ -384,6 +384,7 @@ def rmdir(args, cwd, root, user):
         return None
     path = args[0]
     path = get_absolute_path(path, cwd, root)
+    print(path)
 
     # separate into remove file and path
     rm_file = path[-1]
