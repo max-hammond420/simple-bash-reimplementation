@@ -33,7 +33,10 @@ def main():
             elif full_cmd[0] == 'adduser':
                 if len(full_cmd) == 2:
                     if current_user == 'root':
-                        users.append(full_cmd[1])
+                        if full_cmd[1] in users:
+                            print("adduser: The user already exists")
+                        else:
+                            users.append(full_cmd[1])
                     else:
                         print("adduser: Must be root")
                 else:
