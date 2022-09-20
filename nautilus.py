@@ -25,6 +25,11 @@ def main():
 
         cmd = str(input(display_prompt(current_user, cwd, root)))
 
+        cmd = cmd.strip()
+
+        if cmd == "":
+            continue
+
         full_cmd = cmd.split(' ')
         if full_cmd[0] in cmds:
 
