@@ -10,7 +10,7 @@ def execute(cmd: list, user, cwd, root) -> None:
 
     # Part 1
     if a == "pwd":
-        print(pwd(cwd, root))
+        print(pwd(args, cwd, root))
     elif a == "mkdir":
         mkdir(args, cwd, user, root)
     elif a == "touch":

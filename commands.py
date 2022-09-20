@@ -76,7 +76,11 @@ def check_valid_path(path):
     return True
 
 
-def pwd(cwd, root):
+def pwd(args, cwd, root):
+
+    if len(args) != 0:
+        return "pwd: Invalid syntax"
+
     ls = [cwd.get_name()]
 
     # get cwd in a list, append directory
