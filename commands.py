@@ -387,7 +387,7 @@ def rmdir(args, cwd, root, user):
 
     # separate into remove file and path
     rm_file = path[-1]
-    path = path[]
+    path = path[-1]
 
     # convert path to folder objects
     path = conv_path_to_obj(path, root)
