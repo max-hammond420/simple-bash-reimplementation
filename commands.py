@@ -332,7 +332,7 @@ def mv(args, cwd, root, user):
 
 
 def rm(args, cwd, root, user):
-    if len(args) > 1:
+    if len(args) != 1:
         print("rm: Invalid syntax")
         return None
     path = args[0]
