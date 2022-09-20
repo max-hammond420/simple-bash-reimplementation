@@ -398,9 +398,6 @@ def rmdir(args, cwd, root, user):
 
     child = path[-1].get_child(rm_file)
 
-    print("child:", child)
-    print("cwd:", cwd)
-
     if child is None:
         print("rmdir: Cannot remove pwd")
         return None
