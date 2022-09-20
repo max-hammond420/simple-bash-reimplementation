@@ -400,7 +400,8 @@ def rmdir(args, cwd, root, user):
 
     print("child:", child)
     print("cwd:", cwd)
-    if child == pwd:
+
+    if child is None:
         print("rmdir: Cannot remove pwd")
         return None
 
