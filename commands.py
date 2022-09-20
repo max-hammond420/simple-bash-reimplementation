@@ -306,6 +306,16 @@ def mv(args, cwd, root, user):
     src = conv_path_to_obj(src, root)
     dst = conv_path_to_obj(dst, root)
 
+    # Error msgs
+    if dst is None:
+        print("mv: No such file or directory")
+        return None
+
+    for i in range(len(dst)):
+        if type(dst[i]) is File:
+            print("mv: No such file or directory")
+            return None
+
     if type(dst[-1].get_child(dst_file_name)) is Folder:
         print("mv: Destination is a directory")
         return None
