@@ -253,6 +253,10 @@ def cp(args, cwd, root, user):
 
     # Check errors in user input
 
+    if dst[-1].get_child(dst_file_name) is not None:
+        print("cp: File exists")
+        return None
+
     if dst is None:
         print("cp: No such file or directory")
         return None
@@ -263,10 +267,6 @@ def cp(args, cwd, root, user):
 
     if type(dst[-1].get_child(dst_file_name)) is Folder:
         print("cp: Destination is a directory")
-        return None
-
-    if dst[-1].get_child(dst_file_name) is not None:
-        print("cp: File exists")
         return None
 
     if type(src[-1].get_child(src_file_name)) is Folder:
