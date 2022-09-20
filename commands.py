@@ -364,7 +364,7 @@ def rm(args, cwd, root, user):
 
 
 def rmdir(args, cwd, root, user):
-    if len(args) > 1:
+    if len(args) != 1:
         print("rmdir: Invalid syntax")
         return None
     path = args[0]
