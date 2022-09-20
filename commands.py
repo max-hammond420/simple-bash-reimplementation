@@ -257,7 +257,7 @@ def cp(args, cwd, root, user):
         print("cp: No such file or directory")
         return None
 
-    for i in range(len(dst)-1):
+    for i in range(len(dst)):
         if dst[i] is File:
             print("cp: No such file or directory")
             return None
