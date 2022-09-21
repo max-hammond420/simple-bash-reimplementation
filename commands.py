@@ -219,14 +219,14 @@ def mkdir_dash_p(args, cwd, user, root):
         return s
 
     path = args[0]
-    print(path)
+    # print(path)
     path = get_absolute_path(path, cwd, root)
-    print(path)
+    # print(path)
 
     for i in range(len(path)):
         curr_path = path[:i+1]
         if check_valid_path(conv_path_to_obj(curr_path, root)) is False:
-            print(get_path_str(curr_path))
+            # print(get_path_str(curr_path))
             mkdir([get_path_str(curr_path)], cwd, user, root)
 
 
