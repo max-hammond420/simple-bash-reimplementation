@@ -182,11 +182,13 @@ def mkdir(args, cwd, user, root):
     if '-p' in args:
         dash_p = True
         args.remove('-p')
-        return mkdir_dash_p(args, cwd, user, root)
 
     if len(args) != 1:
         print("mkdir: Invalid syntax")
         return None
+
+    if dash_p:
+        return mkdir_dash_p(args, cwd, user, root)
 
     path = args[0]
     new_folder_name = args[0][-1]
