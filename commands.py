@@ -211,10 +211,6 @@ def mkdir(args, cwd, user, root):
 
 
 def mkdir_dash_p(args, cwd, user, root):
-    if len(args) != 1:
-        print("mkdir: Invalid syntax")
-        return None
-
     def get_path_str(path):
         # takes in path as a list and returns e.g. /a/c/b/c
         s = ''
@@ -225,6 +221,7 @@ def mkdir_dash_p(args, cwd, user, root):
     path = get_absolute_path(args[0], cwd, root)
     for i in range(len(path)):
         if conv_path_to_obj(path[:i+1], root) is None:
+            print('current_path:', get_path_str(path))
             mkdir(get_path_str(path), cwd, user, root)
 
 
