@@ -218,7 +218,7 @@ def mkdir_dash_p(args, cwd, user, root):
             s += '/'+path[i]
         return s
 
-    path = get_asolute_path(args, cwd, root) 
+    path = get_absolute_path(args, cwd, root)
     print(path)
 
 
