@@ -220,9 +220,11 @@ def mkdir_dash_p(args, cwd, user, root):
 
     path = get_absolute_path(args[0], cwd, root)
     for i in range(len(path)):
-        if conv_path_to_obj(path[:i+1], root) is None:
-            print('current_path:', get_path_str(path))
-            mkdir(get_path_str(path), cwd, user, root)
+        path_check = conv_path_to_obj(path[:i+1], root)
+        if path_check is None:
+            if check_valid_path(path_check) is False:
+                print('current_path:', get_path_str(path))
+                mkdir(get_path_str(path), cwd, user, root)
 
 
 def touch(args, cwd, user, root):
