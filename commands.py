@@ -179,7 +179,6 @@ def mkdir(args, cwd, user, root):
     # if path[i+1] is not a child of path[i], return error msg
     # if add path[-1] to path[-2].items
     dash_p = False
-    print(args)
     if '-p' in args:
         dash_p = True
         args.remove('-p')
@@ -219,7 +218,7 @@ def mkdir_dash_p(args, cwd, user, root):
             s += '/'+path[i]
         return s
 
-    print(args)
+    path = args[0]
     path = get_absolute_path(args, cwd, root)
     print(path)
 
