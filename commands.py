@@ -174,7 +174,7 @@ def cd(args, cwd, user, root):
     return path_obj[-1]
 
 
-def mkdir(args, cwd, user, root):
+def mkdir(args, cwd, user, root, errors=True):
     # iterate through path[:-2]
     # if path[i+1] is not a child of path[i], return error msg
     # if add path[-1] to path[-2].items
@@ -184,7 +184,8 @@ def mkdir(args, cwd, user, root):
         args.remove('-p')
 
     if len(args) != 1:
-        print("mkdir: Invalid syntax")
+        if errors:
+            print("mkdir: Invalid syntax")
         return None
 
     if dash_p is True:
@@ -199,14 +200,16 @@ def mkdir(args, cwd, user, root):
 
     path = conv_path_to_obj(path, root)
     if check_valid_path(path) is False:
-        print("mkdir: Ancestor directory does not exist")
+        if errors:
+            print("mkdir: Ancestor directory does not exist")
         return None
 
     new_folder = Folder(new_folder_name, user, path[-1])
     new_folder.add_parent(path[-1])
     parent = path[-1].add_item(new_folder, user)
     if parent is False:
-        print("mkdir: File exists")
+        if errors:
+            print("mkdir: File exists")
         return None
 
 
@@ -228,9 +231,7 @@ def mkdir_dash_p(args, cwd, user, root):
 
         if check_valid_path(conv_path_to_obj(curr_path, root)) is False:
             # print(get_path_str(curr_path))
-            if mkdir([get_path_str(curr_path)], cwd, user, root) is None:
-                return None
-            mkdir([get_path_str(curr_path)], cwd, user, root)
+            mkdir([get_path_str(curr_path)], cwd, user, root, False)
 
 
 def touch(args, cwd, user, root):
