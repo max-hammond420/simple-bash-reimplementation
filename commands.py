@@ -224,7 +224,7 @@ def mkdir_dash_p(args, cwd, user, root):
         if path_check is None:
             if check_valid_path(path_check) is False:
                 print('current_path:', get_path_str(path))
-                mkdir(get_path_str(path), cwd, user, root)
+                mkdir(get_path_str(path[:i+1]), cwd, user, root)
 
 
 def touch(args, cwd, user, root):
