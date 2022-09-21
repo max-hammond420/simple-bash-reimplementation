@@ -223,6 +223,10 @@ def mkdir_dash_p(args, cwd, user, root):
     path = get_absolute_path(path, cwd, root)
     print(path)
 
+    for i in range(len(path)):
+        curr_path = path[:i+1]
+        print(curr_path)
+
 
 def touch(args, cwd, user, root):
     # iterate through path[:-2]
