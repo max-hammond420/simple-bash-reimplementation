@@ -179,6 +179,7 @@ def mkdir(args, cwd, user, root):
     # if path[i+1] is not a child of path[i], return error msg
     # if add path[-1] to path[-2].items
     dash_p = False
+    print(args)
     if '-p' in args:
         dash_p = True
         args.remove('-p')
@@ -187,7 +188,7 @@ def mkdir(args, cwd, user, root):
         print("mkdir: Invalid syntax")
         return None
 
-    if dash_p:
+    if dash_p is True:
         return mkdir_dash_p(args, cwd, user, root)
 
     path = args[0]
