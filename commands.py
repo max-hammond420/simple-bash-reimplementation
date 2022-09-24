@@ -419,15 +419,11 @@ def rmdir(args, cwd, root, user):
     # convert path to folder objects
     path = conv_path_to_obj(path, root)
 
-    if path is None:
-        print("rmdir: No such file or directory")
-        return None
-
-    print(rm_file)
-
     child = path[-1].get_child(rm_file)
 
-    print(child)
+    print("path:", path)
+    print("rm_file:", rm_file)
+    print("child:", child)
 
     if child is None:
         print("rmdir: No such file or directory")
