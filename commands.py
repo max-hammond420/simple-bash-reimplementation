@@ -413,9 +413,6 @@ def rmdir(args, cwd, root, user):
     path = get_absolute_path(path, cwd, root)
 
     # separate into remove file and path
-    rm_file = path[-1]
-    path = path[:-1]
-
     # convert path to folder objects
     path = conv_path_to_obj(path, root)
     if check_valid_path(path) is False:
