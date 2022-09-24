@@ -423,6 +423,8 @@ def rmdir(args, cwd, root, user):
         return None
 
     child = path[-1]
+    print(child.get_name())
+    print(child.get_items())
 
     if child is None:
         print("rmdir: No such file or directory")
