@@ -437,4 +437,4 @@ def rmdir(args, cwd, root, user):
         print("rmdir: Cannot remove pwd")
         return None
 
-    path[-1].remove_item(rm_file, user)
+    path[-2].remove_item(path[-1].get_name(), user)
