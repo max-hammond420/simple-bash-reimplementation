@@ -414,16 +414,16 @@ def rmdir(args, cwd, root, user):
 
     # separate into remove file and path
     rm_file = path[-1]
-    path = path[:-1]
+    path = path[:-2]
 
     # convert path to folder objects
     path = conv_path_to_obj(path, root)
-    print("path:", path)
-    print("rm_file:", rm_file)
+    # print("path:", path)
+    # print("rm_file:", rm_file)
 
     child = path[-1].get_child(rm_file)
 
-    print("child:", child)
+    # print("child:", child)
 
     if child is None:
         print("rmdir: No such file or directory")
