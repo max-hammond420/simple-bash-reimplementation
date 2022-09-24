@@ -230,7 +230,7 @@ def mkdir_dash_p(args, cwd, user, root):
         curr_path = path[:i+1]
 
         if check_valid_path(conv_path_to_obj(curr_path, root)) is False:
-            # print(get_path_str(curr_path))
+            # set erros to False so mkdir doenst print errors
             mkdir([get_path_str(curr_path)], cwd, user, root, False)
 
 
@@ -425,34 +425,20 @@ def rmdir(args, cwd, root, user):
 
     child = path[-1].get_child(rm_file)
 
-    if child is not None:
-        if child.get_items() > 0:
-            print("rmdir: Directory not empty")
-            return None
-
-    if child is None:
-        print("rmdir: Cannot remove pwd")
-        return None
-
-    # check if path is valid
-    if check_valid_path(path) is False:
-        print("rmdir: No such file or directory")
-        return None
-
     if child is None:
         print("rmdir: No such file or directory")
-        return None
-
-    if cwd == child:
-        print("rmdir: Cannot remove pwd")
         return None
 
     if type(child) is File:
         print("rmdir: Not a directory")
         return None
 
-    if len(child.get_items()) > 0:
+    if child.get_items() == 0:
         print("rmdir: Directory not empty")
+        return None
+
+    if child == cwd:
+        print("rmdir: Cannot remove cwd")
         return None
 
     path[-1].remove_item(rm_file, user)
