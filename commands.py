@@ -432,7 +432,7 @@ def rmdir(args, cwd, root, user):
         print("rmdir: Not a directory")
         return None
 
-    if child.get_items() != 0:
+    if child.items != 0:
         print("rmdir: Directory not empty")
         return None
 
