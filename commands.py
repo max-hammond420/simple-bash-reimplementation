@@ -428,12 +428,12 @@ def rmdir(args, cwd, root, user):
         print("rmdir: Not a directory")
         return None
 
-    if child.get_items() == 0:
+    if child.get_items() != 0:
         print("rmdir: Directory not empty")
         return None
 
     if child == cwd:
-        print("rmdir: Cannot remove cwd")
+        print("rmdir: Cannot remove pwd")
         return None
 
     path[-1].remove_item(rm_file, user)
