@@ -415,7 +415,7 @@ def rmdir(args, cwd, root, user):
     # separate into remove file and path
     # convert path to folder objects
     path = conv_path_to_obj(path, root)
-    if check_valid_path(path) is False:
+    if check_valid_path(path[:-1]) is False:
         print("rmdir: No such file or directory")
         return None
 
