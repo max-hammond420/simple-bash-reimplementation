@@ -135,18 +135,13 @@ def ls(args, cwd, user, root):
 
     # works similar to if a File, also a special case
     if dash_d:
-        if dash_l:
-            name = dir.get_name()
-            if cwd == dir:
-                if cwd.get_name() == "":
-                    name = '/'
-                if dash_a:
-                    if len(args) == 0:
-                        name = '.'
-                    else:
-                        name = ''
-            return f"{cwd.get_permissions()} {cwd.get_owner()} {name}\n"
-        return f"{dir.get_name()}\n"
+        if len(args) == 0:
+            name = ""
+        else:
+            name = args[0]
+
+        if not dash_a and name[0] == '.':
+
 
     items = dir.get_item_names()
     items_obj = dir.get_items()
@@ -172,13 +167,15 @@ def ls(args, cwd, user, root):
             ls.append(f"{items_obj[i].get_permissions()} {items_obj[i].get_owner()} {items_obj[i].get_name()}")
 
         s = '\n'.join(ls)
-        s += '\n'
+        if len(s) > 0:
+            s += '\n'
     else:
         items = sorted(items)
         if dash_a:
             s += '.\n..\n'
         s += '\n'.join(items)
-        s += '\n'
+        if len(s) > 0:
+            s += '\n'
 
     return s
 
