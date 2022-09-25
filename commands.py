@@ -155,9 +155,12 @@ def ls(args, cwd, user, root):
 
     if dash_l:
         ls = []
+        items_obj = sorted(items_obj, key=operator.attrgetter("name"))
+
         if dash_a:
             ls.append(f"{cwd.get_permissions()} {cwd.get_owner()} .")
             ls.append(f"{cwd.get_permissions()} {cwd.get_owner()} ..")
+
 
         for i in range(len(items_obj)):
             if not dash_a:
