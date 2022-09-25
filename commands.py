@@ -144,7 +144,6 @@ def ls(args, cwd, user, root):
                 return ''
 
         if (dash_a is False) and (name[0] == '.'):
-            print('name:', name)
             return ''
 
         if (dash_l is True):
