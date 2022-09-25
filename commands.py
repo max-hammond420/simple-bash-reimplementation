@@ -139,18 +139,18 @@ def ls(args, cwd, user, root):
             if dash_a is True:
                 name = '.'
             else:
-                name = ""
+                return "\n"
         else:
             name = args[0]
 
         if len(args) > 0:
             if (dash_a is False) and (name[0] == '.'):
-                return ''
+                return '\n'
 
         if (dash_l is True):
             name = f"{cwd.get_permissions()} {cwd.get_owner()} {name}"
 
-        return f"{name}\n"
+        return f"{name}"
 
     items = dir.get_item_names()
     items_obj = dir.get_items()
