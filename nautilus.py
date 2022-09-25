@@ -44,7 +44,7 @@ def main():
                         else:
                             users.append(full_cmd[1])
                     else:
-                        print("adduser: Must be root")
+                        print("adduser: Operation not permitted")
                 else:
                     print("adduser: Invalid syntax")
 
@@ -63,7 +63,7 @@ def main():
                         else:
                             print("deluser: The user does not exist")
                     else:
-                        print("deluser: Must be root")
+                        print("deluser: Operation not permitted")
                 else:
                     print("deluser: Invalid syntax")
 
