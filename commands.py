@@ -127,6 +127,8 @@ def ls(args, cwd, user, root):
 
     # special case if ls points to a file
     if type(dir) is File:
+        if not dash_a and dir.get_name()[0] == .:
+            return ""
         if dash_l:
             return f"{dir.get_permissions()} {dir.get_owner()} {dir.get_name()}\n"
         return f"{dir.get_name()}\n"
