@@ -143,6 +143,8 @@ def ls(args, cwd, user, root):
         if (dash_a is False) and (name[0] == '.'):
             return '\n'
 
+        print('name:', name)
+
         return f"{name}\n"
 
     items = dir.get_item_names()
