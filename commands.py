@@ -105,48 +105,44 @@ def ls(args, cwd, user, root):
     if '-a' in args:
         dash_a = True
         args.remove('-a')
-    elif '-l' in args:
+    if '-l' in args:
         dash_l = True
         args.remove('-l')
-    elif '-d' in args:
+    if '-d' in args:
         dash_d = True
         args.remove('-d')
 
-    if len(args) != 0 and len(args) != 1:
-        print("ls: Invalid Syntax")
-        return None
+    if len(args) > 1:
+        return ("ls: Invalid syntax")
 
     if len(args) == 1:
-        path = get_absolute_path(args[0], cwd, root)
+        path = args[0]
+        path = get_absolute_path(path, cwd, root)
         path = conv_path_to_obj(path, root)
-        cwd = path[-1]
+        if path is None:
+            return "ls: No such file or directory"
+        dir = path[-1]
+    else:
+        dir = cwd
 
-    """
-    if check_valid_path(cwd) is False:
-        print("ls: No such file or directory")
-        return None
-    """
-
-    items_str = cwd.get_item_names()
-    items_str = sorted(items_str)
-
-    items_obj = cwd.get_items()
-
-    if dash_a is False:
-        for i in range(len(items_str)):
-            if items_str[i][0] == '.':
-                items_str.pop(i)
-
-    if dash_l is True:
-        for i in range(len(items_obj)):
-            items_obj[i] = items_obj[i].get_permissions()+" "+items_obj[i].get_owner()+" "+items_obj[i].get_name()
-
-    if dash_l is True:
-        return "\n".join(map(str, items_obj))
+    items = dir.get_item_names()
+    items_obj = dir.get_items()
 
     s = ''
-    for i in range(len(items_str)):
-        s += items_str[i] + ' '
+
+    if not dash_a:
+        items = [value for value in items if value[0] != '.']
+
+    if dash_l:
+        ls = []
+        for i in range(len(items_obj)):
+            if not dash_a:
+                if items_obj[i].get_name()[0] == '.':
+                    continue
+            ls.append(f"{items_obj[i].get_permissions()} {items_obj[i].get_owner()} {items_obj[i].get_name()}")
+
+        s = '\n'.join(ls)
+
     return s
 
 
