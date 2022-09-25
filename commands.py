@@ -129,7 +129,7 @@ def ls(args, cwd, user, root):
     if type(dir) is File:
         if dash_l:
             return f"{dir.get_permissions()} {dir.get_owner()} {dir.get_name()}\n"
-        return dir.get_name()+'\n'
+        return f"{dir.get_name()}\n"
 
     items = dir.get_item_names()
     items_obj = dir.get_items()
@@ -149,6 +149,7 @@ def ls(args, cwd, user, root):
             ls.append(f"{items_obj[i].get_permissions()} {items_obj[i].get_owner()} {items_obj[i].get_name()}")
 
         s = '\n'.join(ls)
+        s += '\n'
     else:
         for i in range(len(items)):
             s += items + ' '
