@@ -31,11 +31,5 @@ def execute(cmd: list, user, cwd, root) -> None:
         pass
     elif a == "chown":
         pass
-    elif a == "adduser":
-        pass
-    elif a == "deluser":
-        pass
-    elif a == "su":
-        pass
     elif a == "ls":
-        print(ls(args, cwd, user, root))
+        print(ls(args, cwd, user, root), end='')
