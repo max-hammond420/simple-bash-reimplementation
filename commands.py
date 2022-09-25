@@ -136,7 +136,10 @@ def ls(args, cwd, user, root):
     # works similar to if a File, also a special case
     if dash_d:
         if len(args) == 0:
-            name = ""
+            if dash_a is True:
+                name = '.'
+            else:
+                name = ""
         else:
             name = args[0]
 
