@@ -130,8 +130,8 @@ def ls(args, cwd, user, root):
         if not dash_a and dir.get_name()[0] == '.':
             return ""
         if dash_l:
-            return f"{dir.get_permissions()} {dir.get_owner()} {dir.get_name()}\n"
-        return f"{dir.get_name()}\n"
+            return f"{dir.get_permissions()} {dir.get_owner()} {path)}\n"
+        return f"{path}\n"
 
     # works similar to if a File, also a special case
     if dash_d:
