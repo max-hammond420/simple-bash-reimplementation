@@ -132,7 +132,7 @@ def ls(args, cwd, user, root):
     items = dir.get_item_names()
     items_obj = dir.get_items()
 
-    s = ''
+    s = '', end =''
 
     # remove every dotfile if '-a' is not specified
     if not dash_a:
