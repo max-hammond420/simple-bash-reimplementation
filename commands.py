@@ -135,20 +135,10 @@ def ls(args, cwd, user, root):
 
     # works similar to if a File, also a special case
     if dash_d:
-        if len(args) == 0:
-            if dash_a is True:
-                name = '.'
-            else:
-                return "\n"
-        else:
-            name = args[0]
-
         if len(args) > 0:
-            if (dash_a is False) and (name[0] == '.'):
-                return '\n'
-
-        if (dash_l is True):
-            name = f"{cwd.get_permissions()} {cwd.get_owner()} {name}"
+            name = args[0]
+        else:
+            return '\n'
 
         return f"{name}\n"
 
