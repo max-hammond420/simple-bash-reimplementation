@@ -142,6 +142,10 @@ def ls(args, cwd, user, root):
             ls.append(f"{items_obj[i].get_permissions()} {items_obj[i].get_owner()} {items_obj[i].get_name()}")
 
         s = '\n'.join(ls)
+    else:
+        for i in range(len(items)):
+            s += items + ' '
+        s = s[:-1]
 
     return s
 
