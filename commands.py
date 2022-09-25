@@ -177,7 +177,7 @@ def ls(args, cwd, user, root):
             ls.append(f"{items_obj[i].get_permissions()} {items_obj[i].get_owner()} {items_obj[i].get_name()}")
 
         s = '\n'.join(ls)
-        if len(s) > 2:
+        if len(s) > 3:
             s += '\n'
     else:
         items = sorted(items)
