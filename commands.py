@@ -138,7 +138,10 @@ def ls(args, cwd, user, root):
         if len(args) > 0:
             name = args[0]
         else:
-            return ''
+            if (dash_a is True):
+                name = '.'
+            else:
+                return ''
 
         if (dash_a is False) and (name[0] == '.'):
             print('name:', name)
