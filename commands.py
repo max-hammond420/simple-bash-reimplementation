@@ -187,8 +187,7 @@ def ls(args, cwd, user, root):
         if (len(items) == 0) and (dash_a is True):
             pass
         else:
-            s += '\n'
-
+            pass
     return s
 
 
