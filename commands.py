@@ -132,7 +132,7 @@ def ls(args, cwd, user, root):
         return f"{dir.get_name()}\n"
 
     if dash_d:
-        return f"{dir.get_name()}\n"
+        return f"{dir.get_name()}"
 
     items = dir.get_item_names()
     items_obj = dir.get_items()
