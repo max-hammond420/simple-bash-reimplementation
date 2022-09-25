@@ -184,7 +184,7 @@ def ls(args, cwd, user, root):
         if dash_a:
             s += '.\n..\n'
         s += '\n'.join(items)
-        if len(path) != 0:
+        if len(s) > 0:
             s += '\n'
 
     return s
