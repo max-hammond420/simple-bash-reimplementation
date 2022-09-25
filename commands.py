@@ -137,11 +137,10 @@ def ls(args, cwd, user, root):
     if dash_d:
         if dash_l:
             if cwd == dir:
+                name = dir.get_name()
                 if cwd.get_name() == "":
                     name = '/'
-                else:
-                    name = '.'
-            return f"{cwd.get_permissions()} {cwd.get_owner()} {name}\n"
+                return f"{cwd.get_permissions()} {cwd.get_owner()} {name}\n"
         return f"{dir.get_name()}\n"
 
     items = dir.get_item_names()
