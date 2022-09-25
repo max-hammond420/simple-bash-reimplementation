@@ -159,6 +159,9 @@ def ls(args, cwd, user, root):
             if not dash_a:
                 if items_obj[i].get_name()[0] == '.':
                     continue
+            else:
+                ls.append(f"{cwd.get_permissions()} {cwd.get_owner} .")
+                ls.append(f"{cwd.get_permissions()} {cwd.get_owner} ..")
             ls.append(f"{items_obj[i].get_permissions()} {items_obj[i].get_owner()} {items_obj[i].get_name()}")
 
         s = '\n'.join(ls)
