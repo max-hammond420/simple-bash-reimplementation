@@ -136,11 +136,13 @@ def ls(args, cwd, user, root):
     # works similar to if a File, also a special case
     if dash_d:
         if dash_l:
+            name = dir.get_name()
             if cwd == dir:
-                name = dir.get_name()
                 if cwd.get_name() == "":
                     name = '/'
-                return f"{cwd.get_permissions()} {cwd.get_owner()} {name}\n"
+                if len(args) == 0:
+                    name = '.'
+            return f"{cwd.get_permissions()} {cwd.get_owner()} {name}\n"
         return f"{dir.get_name()}\n"
 
     items = dir.get_item_names()
