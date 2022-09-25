@@ -177,16 +177,14 @@ def ls(args, cwd, user, root):
             ls.append(f"{items_obj[i].get_permissions()} {items_obj[i].get_owner()} {items_obj[i].get_name()}")
 
         s = '\n'.join(ls)
-        if (dash_a is True) and (len(ls) > 2):
-            s += '\n'
-        elif (dash_a is False) and (len(ls) > 0):
+        if len(s) > 0:
             s += '\n'
     else:
         items = sorted(items)
         if dash_a:
             s += '.\n..\n'
         s += '\n'.join(items)
-        if (dash_a is False) and (len(items) > 0):
+        if len(path) != 0:
             s += '\n'
 
     return s
