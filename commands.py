@@ -116,8 +116,8 @@ def ls(args, cwd, user, root):
         return ("ls: Invalid syntax\n")
 
     if len(args) == 1:
-        path = args[0]
-        path = get_absolute_path(path, cwd, root)
+        path_old = args[0]
+        path = get_absolute_path(path_old, cwd, root)
         path = conv_path_to_obj(path, root)
         if path is None:
             return "ls: No such file or directory\n"
@@ -130,8 +130,8 @@ def ls(args, cwd, user, root):
         if not dash_a and dir.get_name()[0] == '.':
             return ""
         if dash_l:
-            return f"{dir.get_permissions()} {dir.get_owner()} {path}\n"
-        return f"{path}\n"
+            return f"{dir.get_permissions()} {dir.get_owner()} {path_old}\n"
+        return f"{path_old}\n"
 
     # works similar to if a File, also a special case
     if dash_d:
