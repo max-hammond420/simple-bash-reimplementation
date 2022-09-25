@@ -113,14 +113,14 @@ def ls(args, cwd, user, root):
         args.remove('-d')
 
     if len(args) > 1:
-        return ("ls: Invalid syntax")
+        return ("ls: Invalid syntax\n")
 
     if len(args) == 1:
         path = args[0]
         path = get_absolute_path(path, cwd, root)
         path = conv_path_to_obj(path, root)
         if path is None:
-            return "ls: No such file or directory"
+            return "ls: No such file or directory\n"
         dir = path[-1]
     else:
         dir = cwd
