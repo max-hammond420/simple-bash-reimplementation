@@ -151,9 +151,8 @@ def ls(args, cwd, user, root):
         s = '\n'.join(ls)
         s += '\n'
     else:
-        for i in range(len(items)):
-            s += items + ' '
-        s = s[:-1]
+        s += '.\n..\n'
+        s = '\n'.join(items)
 
     return s
 
