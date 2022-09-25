@@ -141,7 +141,7 @@ def ls(args, cwd, user, root):
                     name = '/'
                 else:
                     name = '.'
-                return f"{cwd.get_permissions()} {cwd.get_owner()} {name}\n"
+            return f"{cwd.get_permissions()} {cwd.get_owner()} {name}\n"
         return f"{dir.get_name()}\n"
 
     items = dir.get_item_names()
@@ -160,7 +160,6 @@ def ls(args, cwd, user, root):
         if dash_a:
             ls.append(f"{cwd.get_permissions()} {cwd.get_owner()} .")
             ls.append(f"{cwd.get_permissions()} {cwd.get_owner()} ..")
-
 
         for i in range(len(items_obj)):
             if not dash_a:
