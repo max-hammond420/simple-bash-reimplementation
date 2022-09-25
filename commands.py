@@ -131,11 +131,12 @@ def ls(args, cwd, user, root):
             return f"{dir.get_permissions()} {dir.get_owner()} {dir.get_name()}\n"
         return f"{dir.get_name()}\n"
 
+    # works similar to if a File, also a special case
     if dash_d:
         if dash_l:
             if cwd == dir:
-                return f"{cwd.get_permissions()} {cwd.get_owner()} ."
-        return f"{dir.get_name()}"
+                return f"{cwd.get_permissions()} {cwd.get_owner()} .\n"
+        return f"{dir.get_name()}\n"
 
     items = dir.get_item_names()
     items_obj = dir.get_items()
