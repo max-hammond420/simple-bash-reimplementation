@@ -151,7 +151,8 @@ def ls(args, cwd, user, root):
         s = '\n'.join(ls)
         s += '\n'
     else:
-        s += '.\n..\n'
+        if dash_a:
+            s += '.\n..\n'
         s += '\n'.join(items)
 
     return s
