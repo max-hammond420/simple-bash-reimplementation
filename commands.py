@@ -146,6 +146,7 @@ def ls(args, cwd, user, root):
         if (dash_l is True):
             name = f"{cwd.get_permissions()} {cwd.get_owner()} {name}"
 
+
         return f"{name}\n"
 
     items = dir.get_item_names()
