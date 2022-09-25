@@ -152,7 +152,7 @@ def ls(args, cwd, user, root):
         s += '\n'
     else:
         s += '.\n..\n'
-        s = '\n'.join(items)
+        s += '\n'.join(items)
 
     return s
 
