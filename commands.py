@@ -155,7 +155,7 @@ def ls(args, cwd, user, root):
 
     if dash_l:
         ls = []
-        items_obj = sorted(items_obj, key=operator.attrgetter("name"))
+        items_obj = sorted(items_obj, key=Folder.name.fget)
 
         if dash_a:
             ls.append(f"{cwd.get_permissions()} {cwd.get_owner()} .")
