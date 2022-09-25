@@ -140,8 +140,11 @@ def ls(args, cwd, user, root):
             if cwd == dir:
                 if cwd.get_name() == "":
                     name = '/'
-                if len(args) == 0:
-                    name = '.'
+                if dash_a:
+                    if len(args) == 0:
+                        name = '.'
+                    else:
+                        name = ''
             return f"{cwd.get_permissions()} {cwd.get_owner()} {name}\n"
         return f"{dir.get_name()}\n"
 
