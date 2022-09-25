@@ -164,6 +164,7 @@ def ls(args, cwd, user, root):
         s = '\n'.join(ls)
         s += '\n'
     else:
+        items = sorted(items)
         if dash_a:
             s += '.\n..\n'
         s += '\n'.join(items)
