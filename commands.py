@@ -141,11 +141,10 @@ def ls(args, cwd, user, root):
             name = args[0]
 
         if (dash_a is False) and (name[0] == '.'):
-            return '\n'
+            return ''
 
         if (dash_l is True):
             name = f"{cwd.get_permissions()} {cwd.get_owner()} {name}"
-
 
         return f"{name}\n"
 
