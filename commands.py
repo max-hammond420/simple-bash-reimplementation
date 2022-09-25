@@ -127,7 +127,7 @@ def ls(args, cwd, user, root):
 
     # special case if ls points to a file
     if type(dir) is File:
-        return dir.get_name()
+        return dir.get_name()+'\n'
 
     items = dir.get_item_names()
     items_obj = dir.get_items()
