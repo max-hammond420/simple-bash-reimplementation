@@ -28,7 +28,7 @@ def execute(cmd: list, user, cwd, root) -> None:
 
     # TODO implement 3rd
     elif a == "chmod":
-        pass
+        chmod(args, cwd, root, user)
     elif a == "chown":
         pass
     elif a == "ls":
