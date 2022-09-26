@@ -2,7 +2,7 @@ from objects import File, Folder
 from commands import *
 
 
-def execute(cmd: list, user, cwd, root) -> None:
+def execute(cmd: list, user, cwd, root, users) -> None:
     a = cmd[0]
     args = []
     if len(cmd) > 1:

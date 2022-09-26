@@ -102,7 +102,7 @@ def main():
 
             else:
 
-                execute(full_cmd, current_user, cwd, root)
+                execute(full_cmd, current_user, cwd, root, users)
         elif full_cmd[0] == "exit":
             if len(full_cmd) != 1:
                 print("exit: Invalid syntax")
