@@ -537,7 +537,7 @@ def chmod(args, cwd, root, user):
     mod_file = path[-1]
 
     # Error handling
-    if (path[-1].get_owner() != user) or (user != root):
+    if (path[-1].get_owner() != user) and (user != root):
         print("chmod: Operation not permitted")
         return None
 
