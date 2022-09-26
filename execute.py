@@ -30,6 +30,6 @@ def execute(cmd: list, user, cwd, root, users) -> None:
     elif a == "chmod":
         chmod(args, cwd, root, user)
     elif a == "chown":
-        pass
+        chown(args, cwd, root, user, users)
     elif a == "ls":
         print(ls(args, cwd, user, root), end='')

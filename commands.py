@@ -531,6 +531,11 @@ def chown(args, cwd, root, user, users):
         return None
 
     ch_user = args[0]
+    # Check if user exists
+    if ch_user not in users:
+        print("chown: Invalid user")
+        return None
+
     path = args[1]
     path = get_absolute_path(path)
     path = conv_path_to_obj(path)
