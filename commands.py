@@ -541,6 +541,7 @@ def chown(args, cwd, root, user, users):
     path = conv_path_to_obj(path, root)
 
     # Check if path exists:
+    pint(path)
     if (type(path)) is None:
         print("chown: No such file or directory")
         return None
