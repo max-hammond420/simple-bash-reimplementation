@@ -1,0 +1,11 @@
+mkdir a
+cd a 
+cd ..
+touch b 
+touch a/b 
+cd a 
+cd .
+pwd
+cd ..
+mkdir b
+exit

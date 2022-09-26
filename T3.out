@@ -1,0 +1,25 @@
+root:/$ root:/$ root:/$ root:/$ root:/$ max:/$ max:/$ root:/$ drwxr-x root a
+drwxr-x root b
+drwxr-x root c
+drwxr-x max d
+root:/$ root:/$ dr--r-- root a
+drwxr-x root b
+drwxr-x root c
+drwxr-x max d
+root:/$ root:/$ dr--r-- root a
+drwxr-x root b
+drwxr-x root c
+drwxr-x max d
+root:/$ root:/$ dr-xr-x root a
+drwxr-x root b
+drwxr-x root c
+drwxr-x max d
+root:/$ b
+root:/$ root:/$ b/c
+root:/$ drwxr-x root .
+drwxr-x root ..
+dr-xr-x root a
+drwxr-x root b
+drwxr-x root c
+drwxr-x max d
+root:/$ bye, root

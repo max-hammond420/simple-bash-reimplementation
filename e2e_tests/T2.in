@@ -1,0 +1,37 @@
+touch a 
+touch b 
+mv a b 
+mv b a 
+mv a c 
+cp a b 
+cp b b 
+cp b a 
+mkdir folder 
+touch folder/a 
+touch folder/b 
+mv folder/a /moved_file 
+cp folder/b /copied_file
+exitb 
+cp b b 
+cp b a 
+mkdir folder 
+touch folder/a 
+touch folder/b 
+mv folder/a /moved_file 
+cp folder/b /copied_file
+exitb 
+cp b b 
+cp b a 
+mkdir folder 
+touch folder/a 
+touch folder/b 
+mv folder/a /moved_file 
+cp folder/b /copied_file
+cp b b 
+cp b a 
+mkdir folder 
+touch folder/a 
+touch folder/b 
+mv folder/a /moved_file 
+cp folder/b /copied_file
+exit

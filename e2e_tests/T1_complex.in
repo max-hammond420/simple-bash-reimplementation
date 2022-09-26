@@ -1,0 +1,6 @@
+mkdir -p a/b/c/d 
+cd a/b/c 
+pwd
+touch d 
+cd / 
+exit

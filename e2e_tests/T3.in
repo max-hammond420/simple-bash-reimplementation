@@ -1,0 +1,19 @@
+mkdir a
+mkdir b
+mkdir c
+adduser max
+su max
+mkdir d
+su
+ls -l
+chmod a=r a
+ls -l
+chmod a-x a
+ls -l
+chmod a+x a
+ls -l
+ls -d b
+mkdir b/c
+ls -d b/c
+ls -l -a
+exit

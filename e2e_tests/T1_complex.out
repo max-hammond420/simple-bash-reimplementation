@@ -1,0 +1,6 @@
+root:/$ 
+root:/$ 
+root:/a/b/c$ /a/b/c
+root:/a/b/c$ touch: File exists
+root:/a/b/c$ 
+root:/$ bye, root

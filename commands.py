@@ -10,10 +10,6 @@ def get_absolute_path(directory, cwd, root):
     if directory[0] == '':
         return directory[1:]
 
-    for i in range(len(directory)):
-        if (directory[0] == '"') and (directory[-1] == '"'):
-            directory[i] = directory[i][1:-1]
-
     destination = []
     ls = [cwd]
 
