@@ -576,7 +576,7 @@ def chmod(args, cwd, root, user):
 
         if operation == '-':
             for i in range(len(current_perms)):
-                if current_perms[i] is False:
+                if current_perms[i] is True:
                     if [r, w, x][i] is True:
                         current_perms[i] = False
 
