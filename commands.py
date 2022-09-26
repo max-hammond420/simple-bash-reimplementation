@@ -569,12 +569,28 @@ def chmod(args, cwd, root, user):
 
         if 'r' in perms:
             r = True
+        if 'w' in perms:
+            w = True
+        if 'x' in perms:
+            x = True
+
         if operation == '-':
-            pass
+            for i in range(len(current_perms)):
+                if current_perms[i] is False:
+                    if [r, w, x][i] is True:
+                        current_perms[i] = False
+
+            return current_perms
+                
         if operation == '+':
-            pass
+            for i in range(len(current_perms)):
+                if current_perms[i] is False:
+                    if [r, w, x][i] is True:
+                        current_perms[i] = True
+
+            return current_perms
         if operation == '=':
-            pass
+            return [r, w, x]
 
     if (group == 'u') or (group == 'a'):
         new_perms = change_file_permissions(operation, mod_file, owner_perms, perms)
