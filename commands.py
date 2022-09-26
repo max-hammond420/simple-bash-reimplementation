@@ -78,6 +78,7 @@ def check_valid_path(path):
 
 def pwd(args, cwd, root):
 
+    # Checking for valid syntax
     if len(args) != 0:
         return "pwd: Invalid syntax"
 
@@ -98,6 +99,8 @@ def pwd(args, cwd, root):
 
 
 def ls(args, cwd, user, root):
+
+    # Setting and checking for flags
     dash_a = False
     dash_l = False
     dash_d = False
@@ -112,9 +115,11 @@ def ls(args, cwd, user, root):
         dash_d = True
         args.remove('-d')
 
+    # Checking for valid syntax
     if len(args) > 1:
         return ("ls: Invalid syntax\n")
 
+    # Allowing for a given path or no path and setting path variable
     if len(args) == 1:
         path_old = args[0]
         path = get_absolute_path(path_old, cwd, root)
@@ -196,10 +201,13 @@ def cd(args, cwd, user, root):
     # iterate through path
     # check that cwd.get_child(path[i]) is not None, else, error
     # return path[-2].get_child(path[-1])
+
+    # Checking for valid syntax
     if len(args) != 1 or len(args) == 0:
         print("cd: Invalid syntax")
         return cwd
 
+    # Setting path variables
     path = args[0]
     path = get_absolute_path(path, cwd, root)
     path_obj = conv_path_to_obj(path, root)
@@ -207,6 +215,7 @@ def cd(args, cwd, user, root):
         print("cd: No such file or directory")
         return cwd
 
+    # Making sure that user hasn't given a destination to a folder
     if type(path_obj[-1]) is not Folder:
         print("cd: Destination is a file")
         return cwd
@@ -220,16 +229,20 @@ def mkdir(args, cwd, user, root, errors=True):
     # iterate through path[:-2]
     # if path[i+1] is not a child of path[i], return error msg
     # if add path[-1] to path[-2].items
+
+    # Checking for the -p flag
     dash_p = False
     if '-p' in args:
         dash_p = True
         args.remove('-p')
 
+    # Checking for valid syntax
     if len(args) != 1:
         if errors:
             print("mkdir: Invalid syntax")
         return None
 
+    # Setting path variables
     if dash_p is True:
         return mkdir_dash_p(args, cwd, user, root)
 
@@ -281,10 +294,12 @@ def touch(args, cwd, user, root):
     # if path[i+1] is not a child of path[i], return error msg
     # if add path[-1] to path[-2].items
 
+    # Checking for valid syntax
     if len(args) != 1:
         print("touch: Invalid syntax")
         return None
 
+    # Setting and checking path variables
     path = args[0]
     new_folder_name = args[0][-1]
 
@@ -293,6 +308,8 @@ def touch(args, cwd, user, root):
     path = path[:-1]
 
     path = conv_path_to_obj(path, root)
+
+    # Error handling
     if not check_valid_path(path):
         print("touch: Ancestor directory does not exist")
         return None
@@ -305,10 +322,13 @@ def touch(args, cwd, user, root):
 
 
 def cp(args, cwd, root, user):
+
+    # Checking vor valid syntax
     if len(args) != 2:
         print("cp: Invalid syntax")
         return None
 
+    # Setting path variables
     src = get_absolute_path(args[0], cwd, root)
     dst = get_absolute_path(args[1], cwd, root)
 
@@ -317,11 +337,11 @@ def cp(args, cwd, root, user):
     dst_file_name = dst[-1]
     dst = dst[:-1]
 
+    # Converting path to objects
     src = conv_path_to_obj(src, root)
     dst = conv_path_to_obj(dst, root)
 
     # Check errors in user input
-
     if dst is None:
         print("cp: No such file or directory")
         return None
@@ -360,10 +380,13 @@ def cp(args, cwd, root, user):
 
 
 def mv(args, cwd, root, user):
+
+    # Checking for valid syntax
     if len(args) != 2:
         print("mv: Invalid syntax")
         return None
 
+    # Checking and setting both source and destination paths
     src = get_absolute_path(args[0], cwd, root)
     dst = get_absolute_path(args[1], cwd, root)
 
@@ -372,6 +395,7 @@ def mv(args, cwd, root, user):
     dst_file_name = dst[-1]
     dst = dst[:-1]
 
+    # Converting paths to File/Folder objects
     src = conv_path_to_obj(src, root)
     dst = conv_path_to_obj(dst, root)
 
@@ -416,9 +440,12 @@ def mv(args, cwd, root, user):
 
 
 def rm(args, cwd, root, user):
+    # Checking for valid syntax
     if len(args) != 1:
         print("rm: Invalid syntax")
         return None
+
+    # Setting and checking given path
     path = args[0]
     path = get_absolute_path(path, cwd, root)
 
@@ -484,3 +511,74 @@ def rmdir(args, cwd, root, user):
         return None
 
     path[-2].remove_item(path[-1].get_name(), user)
+
+
+def chown(args, cwd, root, user):
+    pass
+
+
+def chmod(args, cwd, root, user):
+    dash_r = False
+
+    # Checking Flag
+    if '-r' in args:
+        dash_r = True
+        args.remove('-r')
+
+    # Error handling
+    if len(args) != 2:
+        print("chmod: Invalid syntax")
+
+    # Path variables
+    format = args[0]
+    path = args[1]
+    path = get_absolute_path(path, cwd, root)
+    path = conv_path_to_obj(path, cwd)
+    mod_file = path[-1]
+
+    # Error handling
+    if (path[-1].get_owner() != user) or (user != root):
+        print("chmod: Operation not permitted")
+        return None
+
+    # Check for correct <s>
+    if format[0] not in ['u', 'o', 'a']:
+        print("chmod: Invalid mode")
+        return None
+    if format[1] not in ['-', '+', '=']:
+        print("chmod: Invalid mode")
+        return None
+
+    group = format[0]
+    operation = format[1]
+    perms = format[2:]
+
+    # 
+    owner_perms = mod_file.get_owner_permissions()
+    other_perms = mod_file.get_other_permissions()
+
+    # Function to change permissions
+    def change_file_permissions(operation, mod_file, current_perms, perms):
+        # operation: Str
+        # mod_file: File or Folder obj
+        # current_perms: List e.g. [True, True, True] representing rwx
+
+        r = False
+        w = False
+        x = False
+
+        if 'r' in perms:
+            r = True
+        if operation == '-':
+            pass
+        if operation == '+':
+            pass
+        if operation == '=':
+            pass
+
+    if (group == 'u') or (group == 'a'):
+        new_perms = change_file_permissions(operation, mod_file, owner_perms, perms)
+        mod_file.owner_permissions = new_perms
+    if (group == 'o') or (group == 'a'):
+        new_perms = change_file_permissions(operation, mod_file, other_perms, perms)
+        mod_file.other_permissions = new_perms

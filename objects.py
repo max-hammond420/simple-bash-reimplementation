@@ -96,6 +96,12 @@ class Folder():
     def get_owner(self):
         return self.owner
 
+    def get_owner_permissions(self):
+        return self.owner_permissions
+
+    def get_other_permissions(self):
+        return self.other_permissions
+
     def get_permissions(self) -> str:
         owner_str = ''
         other_str = ''
@@ -130,3 +136,6 @@ class Folder():
 
     def add_parent(self, parent):
         self.parent = parent
+
+    def chmod(self, modify_string, place):
+        pass

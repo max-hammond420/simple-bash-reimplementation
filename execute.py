@@ -16,7 +16,7 @@ def execute(cmd: list, user, cwd, root) -> None:
     elif a == "touch":
         touch(args, cwd, user, root)
 
-    # TODO Implement 2nd
+    # Implement 2nd
     elif a == "cp":
         cp(args, cwd, root, user)
     elif a == "mv":
