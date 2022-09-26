@@ -537,8 +537,8 @@ def chown(args, cwd, root, user, users):
         return None
 
     path = args[1]
-    path = get_absolute_path(path)
-    path = conv_path_to_obj(path)
+    path = get_absolute_path(path, cwd, root)
+    path = conv_path_to_obj(path, root)
 
     # Check if path exists:
     if (type(path)) is None:
