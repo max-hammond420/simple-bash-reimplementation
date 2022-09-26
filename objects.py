@@ -14,12 +14,6 @@ class File():
     def __str__(self):
         return self.name
 
-    def __eq__(self, other):
-        return self.name == other.name
-
-    def __lt__(self, other):
-        return self.name == other.name
-
     def get_name(self):
         return self.name
 
@@ -28,6 +22,12 @@ class File():
 
     def get_owner(self):
         return self.owner
+
+    def get_owner_permissions(self):
+        return self.owner_permissions
+
+    def get_other_permissions(self):
+        return self.other_permissions
 
     def get_permissions(self) -> str:
         owner_str = ''
