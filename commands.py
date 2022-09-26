@@ -513,8 +513,35 @@ def rmdir(args, cwd, root, user):
     path[-2].remove_item(path[-1].get_name(), user)
 
 
-def chown(args, cwd, root, user):
-    pass
+def chown(args, cwd, root, user, users):
+
+    # Checking for '-r' flag
+    dash_r = False
+    if '-r' in args:
+        dash_r = True
+        args.remove('-r')
+
+    # Error handling
+    if len(args) != 2:
+        print("chown: Invalid syntax")
+        return None
+
+    if user != root:
+        print("chown: Operation not permitted")
+        return None
+
+    ch_user = args[0]
+    path = args[1]
+    path = get_absolute_path(path)
+    path = conv_path_to_obj(path)
+
+    # Check if path exists:
+    if (type(path)) is None:
+        print("chown: No such file or directory")
+        return None
+
+    ch_file = path[-1]
+    ch_file.owner = ch_user
 
 
 def chmod(args, cwd, root, user):
