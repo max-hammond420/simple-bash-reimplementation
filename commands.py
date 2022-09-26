@@ -526,6 +526,7 @@ def chown(args, cwd, root, user, users):
         print("chown: Invalid syntax")
         return None
 
+    print(user)
     if user != root:
         print("chown: Operation not permitted")
         return None
